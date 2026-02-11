@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://bsu5rcycso8lx"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_mpfqe"]
+[ext_resource type="Texture2D" uid="uid://y4omgeden02u" path="res://assets/units/archer/idle.png" id="2_ihcqw"]
+
+[resource]
+script = ExtResource("1_mpfqe")
+texture = ExtResource("2_ihcqw")

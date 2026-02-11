@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://b2r3fmiaasoq7"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_qnpc5"]
+[ext_resource type="Texture2D" uid="uid://ddwg5375knue7" path="res://assets/units/wizard/move.png" id="2_77ua0"]
+
+[resource]
+script = ExtResource("1_qnpc5")
+texture = ExtResource("2_77ua0")
+frames = 4

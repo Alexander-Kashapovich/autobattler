@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=14 format=3 uid="uid://cfclfxkoewwbc"]
+
+[ext_resource type="Script" uid="uid://4ik60cr210hr" path="res://game_actors/skills/skill.gd" id="1_l3qbf"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="2_y7fxp"]
+[ext_resource type="Resource" uid="uid://dnytnvjyhw1qt" path="res://resources/build_data/units/trooper/trooper_spawner_data.tres" id="3_3nwk3"]
+[ext_resource type="PackedScene" uid="uid://cs35vy85mm67i" path="res://resources/build_data/units/troop.tscn" id="4_1qa2w"]
+[ext_resource type="Script" uid="uid://bjcguf5w6k2pb" path="res://game_actors/skills/effects/spawn_effect.gd" id="5_i3du6"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/test_cast_evaluator.gd" id="6_d6xsm"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="6_sg36n"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="7_nvuvl"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/test_cast_selector.gd" id="8_twvp1"]
+[ext_resource type="AudioStream" uid="uid://drnyijldvmb5x" path="res://assets/sound/steam_hooh.wav" id="8_xtfrv"]
+
+[sub_resource type="Resource" id="Resource_tdb50"]
+script = ExtResource("5_i3du6")
+data = ExtResource("3_3nwk3")
+scene = ExtResource("4_1qa2w")
+count = 2
+metadata/_custom_type_script = "uid://bjcguf5w6k2pb"
+
+[sub_resource type="Resource" id="Resource_00coa"]
+script = ExtResource("1_l3qbf")
+target_effects = Array[ExtResource("2_y7fxp")]([SubResource("Resource_tdb50")])
+metadata/_custom_type_script = "uid://4ik60cr210hr"
+
+[sub_resource type="Resource" id="Resource_kx3vn"]
+script = ExtResource("7_nvuvl")
+is_forced = true
+sounds = Array[AudioStream]([ExtResource("8_xtfrv")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[resource]
+script = ExtResource("6_sg36n")
+nom = "Spawn Archer"
+sound = SubResource("Resource_kx3vn")
+cd = 4.0
+_skill = SubResource("Resource_00coa")
+meta = PackedStringArray("on_self")
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

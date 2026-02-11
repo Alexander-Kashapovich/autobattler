@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://dha5rhlq8obo6"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_hw4lt"]
+[ext_resource type="Texture2D" uid="uid://bfc3ixh3uj6oe" path="res://assets/units/archer/move.png" id="2_jxs4n"]
+
+[resource]
+script = ExtResource("1_hw4lt")
+texture = ExtResource("2_jxs4n")
+frames = 4

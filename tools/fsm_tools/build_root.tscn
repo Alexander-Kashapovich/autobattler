@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqlh2sv5h4uer"]
+
+[ext_resource type="Script" uid="uid://be10rb1te3on5" path="res://tools/fsm_tools/build_root.gd" id="1_xrymt"]
+
+[node name="BuildRoot" type="Node2D"]
+script = ExtResource("1_xrymt")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://endilvhoy2cr"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_ql3s7"]
+[ext_resource type="Texture2D" uid="uid://ds28sipsln252" path="res://assets/units/archer/chase.png" id="2_m4hgt"]
+
+[resource]
+script = ExtResource("1_ql3s7")
+texture = ExtResource("2_m4hgt")
+frames = 2

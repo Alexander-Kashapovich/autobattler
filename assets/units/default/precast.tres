@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://bvscqc11sy88j"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_v2yq4"]
+[ext_resource type="Texture2D" uid="uid://b3lcf8akxera7" path="res://assets/units/default/precast.png" id="2_xgrbp"]
+
+[resource]
+script = ExtResource("1_v2yq4")
+texture = ExtResource("2_xgrbp")
+frames = 2

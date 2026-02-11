@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://dwoytwgoqybdw"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_xx0c1"]
+[ext_resource type="Texture2D" uid="uid://utk1jmlr7cuc" path="res://assets/units/default/stunned.png" id="2_kybm3"]
+
+[resource]
+script = ExtResource("1_xx0c1")
+texture = ExtResource("2_kybm3")
