@@ -1,5 +1,6 @@
 extends Timer
 class_name BuffHandler
+## Manage [BuffSkill]'s of owner
 
 class BuffProcessor:
 	var buff:BuffSkill
@@ -10,49 +11,50 @@ class BuffProcessor:
 	func _init(b:BuffSkill,_c:SkillExecutionContext) -> void:
 		buff = b
 		c = _c
+		#first exec
 		execute()
 
 	func execute() -> void:
 		buff.execute(c)
 
-@export var unit:Alived
+@export var unit:Alive
 
-var _timer:Timer
-
-var buffs:Array[BuffProcessor]
 var enabled:bool = 1
 
+var _buffs:Array[BuffProcessor]
 
 func _ready() -> void:
 	timeout.connect(tick)
 
 func append(buff:BuffSkill,c:SkillExecutionContext) -> void:
-	buffs.append(BuffProcessor.new(buff,c))
-	if enabled and buffs.size() == 1:
-		_timer.start()
+	_buffs.append(BuffProcessor.new(buff,c))
+	#forgeted whai is it for
+	if enabled and _buffs.size() == 1:
+		start()
 
-##when die
+## When die
 func off() -> void:
 	enabled = 0
 	stop()
 
 func tick() -> void:
 	var q_to_del:Array[BuffProcessor]
-	var delta = wait_time
+	var delta:float = wait_time
 
-	for buff in buffs:
-		buff.current_time += delta
-		if buff.current_time > buff.buff.tick:
-			buff.execute()
-			buff.current_time -= buff.buff.tick
+	for buff_p in _buffs:
+		buff_p.current_time += delta
+		if buff_p.current_time > buff_p.buff.tick:
+			buff_p.execute()
+			buff_p.current_time -= buff_p.buff.tick
 			
-			buff.total_time += buff.buff.tick
-			if buff.total_time > buff.buff.time:
-				q_to_del.append(buff)
+			buff_p.total_time += buff_p.buff.tick
+			if buff_p.total_time > buff_p.buff.time:
+				q_to_del.append(buff_p)
 				
-	for b in q_to_del:
-		b.buff.end_skill.execute(b.c)
-		buffs.erase(b)
+	for buff_p in q_to_del:
+		if buff_p.buff.end_skill:
+			buff_p.buff.end_skill.execute(buff_p.c)
+		_buffs.erase(buff_p)
 	
-	if buffs.is_empty():
-		_timer.stop()
+	if _buffs.is_empty():
+		stop()

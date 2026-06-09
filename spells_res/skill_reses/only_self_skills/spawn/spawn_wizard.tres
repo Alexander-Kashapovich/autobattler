@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=11 format=3 uid="uid://86chmylr0o6s"]
+
+[ext_resource type="Script" uid="uid://4ik60cr210hr" path="res://game_actors/skills/skill.gd" id="1_sortl"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="2_pad7u"]
+[ext_resource type="Resource" uid="uid://cacncpbeeavn2" path="res://spawner/aseembling_data/units/wizard/wizard_data.tres" id="3_sortl"]
+[ext_resource type="PackedScene" uid="uid://cs35vy85mm67i" path="res://spawner/aseembling_data/units/unit_sc.tscn" id="4_pad7u"]
+[ext_resource type="Script" uid="uid://bjcguf5w6k2pb" path="res://game_actors/skills/effects/spawn_effect.gd" id="5_d7pky"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="6_ab5ap"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="7_6hp28"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="8_q8r62"]
+
+[sub_resource type="Resource" id="Resource_xcp2e"]
+script = ExtResource("5_d7pky")
+data = ExtResource("3_sortl")
+scene = ExtResource("4_pad7u")
+metadata/_custom_type_script = "uid://bjcguf5w6k2pb"
+
+[sub_resource type="Resource" id="Resource_srunq"]
+script = ExtResource("1_sortl")
+target_effects = Array[ExtResource("2_pad7u")]([SubResource("Resource_xcp2e")])
+metadata/_custom_type_script = "uid://4ik60cr210hr"
+
+[resource]
+script = ExtResource("7_6hp28")
+nom = "Spawn Wizard"
+cd = 10.944
+_skill = SubResource("Resource_srunq")
+on_self = true
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

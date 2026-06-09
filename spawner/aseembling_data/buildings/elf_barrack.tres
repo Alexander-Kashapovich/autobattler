@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BarrackSpawnerData" load_steps=9 format=3 uid="uid://cwhqhtkk551a8"]
+
+[ext_resource type="Script" uid="uid://cpjx4temegckr" path="res://spawner/spawner_data/barrack_spawner_data.gd" id="1_fviy8"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="2_56cd4"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="3_3tceo"]
+[ext_resource type="Resource" uid="uid://cpfjhgu403h8u" path="res://spells_res/skill_reses/only_self_skills/spawn/spawn_elf_troop.tres" id="4_3tceo"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="4_ndvy6"]
+[ext_resource type="Resource" uid="uid://bhojesucmen73" path="res://spells_res/skill_reses/only_self_skills/spawn/spawn_archer.tres" id="5_ndvy6"]
+[ext_resource type="Texture2D" uid="uid://cn3t548rcodq3" path="res://assets/dbg_trash/archer_barrack.png" id="7_ndvy6"]
+
+[sub_resource type="Resource" id="Resource_2o2ge"]
+script = ExtResource("4_ndvy6")
+texture = ExtResource("7_ndvy6")
+
+[resource]
+script = ExtResource("1_fviy8")
+nom = "ElfBarrack"
+is_building = true
+spawner_assemblers = Array[int]([0, 1, 5, 6])
+spells = Dictionary[ExtResource("3_3tceo"), bool]({
+ExtResource("4_3tceo"): true,
+ExtResource("5_ndvy6"): true
+})
+texture = SubResource("Resource_2o2ge")
+metadata/_custom_type_script = "uid://cpjx4temegckr"

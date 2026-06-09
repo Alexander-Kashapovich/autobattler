@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=11 format=3 uid="uid://cpfjhgu403h8u"]
+
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="1_f47gm"]
+[ext_resource type="Script" uid="uid://4ik60cr210hr" path="res://game_actors/skills/skill.gd" id="1_wwgu7"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="2_1f8fp"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="2_02hu5"]
+[ext_resource type="Resource" uid="uid://dsgo5dgduvp6" path="res://spawner/aseembling_data/units/elf_troop/elf_troop_data.tres" id="3_r0vrb"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="3_rsa1v"]
+[ext_resource type="PackedScene" uid="uid://cs35vy85mm67i" path="res://spawner/aseembling_data/units/unit_sc.tscn" id="4_i3rk8"]
+[ext_resource type="Script" uid="uid://bjcguf5w6k2pb" path="res://game_actors/skills/effects/spawn_effect.gd" id="5_mq7xn"]
+
+[sub_resource type="Resource" id="Resource_ja3dm"]
+script = ExtResource("5_mq7xn")
+data = ExtResource("3_r0vrb")
+scene = ExtResource("4_i3rk8")
+metadata/_custom_type_script = "uid://bjcguf5w6k2pb"
+
+[sub_resource type="Resource" id="Resource_p0xrx"]
+script = ExtResource("1_wwgu7")
+target_effects = Array[ExtResource("2_1f8fp")]([SubResource("Resource_ja3dm")])
+metadata/_custom_type_script = "uid://4ik60cr210hr"
+
+[resource]
+script = ExtResource("2_02hu5")
+nom = "Spawn Elf Troop"
+cd = 8.0
+_skill = SubResource("Resource_p0xrx")
+on_self = true
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

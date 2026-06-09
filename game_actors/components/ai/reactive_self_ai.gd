@@ -1,20 +1,24 @@
 extends Timer
 class_name ReactiveSelfAI
+## Trash
 
+@export var unit:Caster
 @export var spells:SpellsHandler
 
 func _ready() -> void:
+	assert(unit)
 	timeout.connect(upd)
 	start()
 
 func upd() -> void:
-	var candidates:Array[Spell] = spells.get_spells()
+	var candidates:Array[Spell] = spells.get_ready_spells()
 	
 	for c in candidates:
-		assert((c.meta.has("on_self")))
+		assert(c.on_self)
 	if candidates.is_empty():return
 	#---selector---
 	var choosen:Spell = candidates.pick_random()
 
 	if choosen:
-		spells.execute_self_cast(choosen)
+		choosen.execute(unit,unit)
+		spells.on_executed(choosen)

@@ -1,16 +1,16 @@
 extends Area2D
 class_name VisionComp
 
-signal ally_enter(who:Alived)
-signal ally_exit(who:Alived)
-signal enemy_enter(who:Alived)
-signal enemy_exit(who:Alived)
+signal ally_enter(who:Alive)
+signal ally_exit(who:Alive)
+signal enemy_enter(who:Alive)
+signal enemy_exit(who:Alive)
 
-@onready var unit:Alived = get_parent()
+@export var team:Team
 
 func _ready() -> void:
-	body_entered.connect(enter)
-	body_exited.connect(exit)
+	area_entered.connect(enter)
+	area_exited.connect(exit)
 
 func set_range(val:float) -> void:
 	var shape = CircleShape2D.new()
@@ -20,16 +20,14 @@ func set_range(val:float) -> void:
 func get_range() -> float:
 	return get_child(0).shape.radius
 
-func enter(u:Alived) -> void:
-	if u.fraction != unit.fraction:
+func enter(u:Alive) -> void:
+	if u.team != team:
 		enemy_enter.emit(u)
 	else:
-		if u != unit:
-			ally_enter.emit(u)
+		ally_enter.emit(u)
 
-func exit(u:Alived) -> void:
-	if u.fraction != unit.fraction:
+func exit(u:Alive) -> void:
+	if u.team != team:
 		enemy_exit.emit(u)
 	else:
-		if u != unit:
-			ally_exit.emit(u)
+		ally_exit.emit(u)

@@ -3,10 +3,11 @@ class_name CurveProjectile
 
 @export var speed:float = 500
 
-var curve:BezieCurve = BezieCurve.new()
+var curve:BezieCurve
 
 var _acc:float = 0
-var _factor:float
+var _factor:float = -1
+
 func _init() -> void:
 	set_physics_process(0)
 
@@ -18,9 +19,10 @@ func start(c:SkillExecutionContext) -> void:
 	context = c
 	c.target.died.connect(on_target_died,CONNECT_ONE_SHOT)
 	
-	var v0 = c.cast_point
-	var v2 = c.target.get_apply_point(self)
-
+	var v0 = c.get_cast_point()
+	var v2 = c.get_apply_point()
+	
+	curve = BezieCurve.new()
 	curve.setup(v0,v2)
 	_factor = speed / v0.distance_to(v2)
 	set_physics_process(1)
@@ -32,14 +34,14 @@ func _physics_process(delta: float) -> void:
 		finish()
 		return
 	
-	curve.upd(context.target.get_apply_point(self))
+	curve.upd(context.get_apply_point())
 	
 	var next := curve.sample(_acc)
 	rotation = (next - global_position).angle()
 	global_position = next
 	queue_redraw()
 
-func on_target_died(_f:Alived) -> void:
+func on_target_died(_f:Alive) -> void:
 	finish()
 
 func finish() -> void:

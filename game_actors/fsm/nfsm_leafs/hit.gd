@@ -1,5 +1,9 @@
+@tool
 extends CommonLock
 class_name Hit
+
+func get_id() -> ID:
+	return ID.ATTACK
 
 func enter_update() -> void:
 	if ctx.target():

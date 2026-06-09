@@ -1,6 +1,7 @@
 @tool
 extends Resource
 class_name BezieCurve
+## Quad Bezier Curve. Auto offset p1 to [height_factor]. Offset always to up.
 
 @export var p0:Vector2
 @export var p1:Vector2

@@ -2,98 +2,126 @@
 
 [ext_resource type="Script" uid="uid://7bu0k4yil0fp" path="res://tools/fsm_tools/fsm_visual.gd" id="1_r0dlw"]
 [ext_resource type="Script" uid="uid://b4m8en5a83c0l" path="res://game_actors/fsm/state.gd" id="2_4b8x2"]
-[ext_resource type="Resource" uid="uid://b6nbhdfwksm4n" path="res://resources/build_data/units/trooper/trooper_root.tres" id="2_gj2p3"]
+[ext_resource type="Resource" uid="uid://co00w2vf1n5ge" path="res://spawner/aseembling_data/units/trooper/trooper_root.tres" id="2_gj2p3"]
 [ext_resource type="Script" uid="uid://bi00tsiv15smh" path="res://game_actors/fsm/nfsm_leafs/dying.gd" id="3_prr5r"]
 [ext_resource type="Resource" uid="uid://bvt3fbcqpdasv" path="res://assets/units/misc/die.tres" id="4_gj2p3"]
 [ext_resource type="Script" uid="uid://dhngvvkemgpyq" path="res://game_actors/fsm/nfsm_leafs/move.gd" id="5_hgsxe"]
+[ext_resource type="Resource" uid="uid://dwoytwgoqybdw" path="res://assets/units/default/stunned.tres" id="6_hgsxe"]
 [ext_resource type="Script" uid="uid://c8m721r7tj42j" path="res://game_actors/fsm/nfsm_leafs/wait_idle.gd" id="7_ch47y"]
-[ext_resource type="Resource" uid="uid://qegh40g7nsrn" path="res://assets/units/default/move.tres" id="7_hgsxe"]
-[ext_resource type="Resource" uid="uid://coardc6brjl18" path="res://assets/units/default/idle.tres" id="9_lj5kx"]
+[ext_resource type="Resource" uid="uid://dmxx4lqvvmjx7" path="res://assets/units/default/chase.tres" id="9_lj5kx"]
 [ext_resource type="Script" uid="uid://b1w5hcbqepsai" path="res://game_actors/fsm/nfsm_nodes/rest_node.gd" id="9_m3udj"]
 [ext_resource type="Script" uid="uid://c51ss8vatgmc8" path="res://game_actors/fsm/nfsm_nodes/retreat_node.gd" id="10_ag5lf"]
 [ext_resource type="Script" uid="uid://dtarjb3ipqchs" path="res://game_actors/fsm/nfsm_leafs/idle.gd" id="11_7350n"]
+[ext_resource type="Resource" uid="uid://bxx4tcanff175" path="res://assets/units/default/swing.tres" id="11_ch47y"]
 [ext_resource type="Script" uid="uid://rwauchcnlg3i" path="res://game_actors/fsm/nfsm_nodes/travel_node.gd" id="12_blgks"]
-[ext_resource type="PackedScene" uid="uid://cqlh2sv5h4uer" path="res://tools/fsm_tools/build_root.tscn" id="12_ncg65"]
-[ext_resource type="Script" uid="uid://csfpu7hhjcpsr" path="res://game_actors/fsm/nfsm_leafs/chase.gd" id="13_qnyw2"]
-[ext_resource type="Resource" uid="uid://dmxx4lqvvmjx7" path="res://assets/units/default/chase.tres" id="15_ch47y"]
+[ext_resource type="Resource" uid="uid://vrj3bnjkywem" path="res://assets/units/default/hit.tres" id="13_3njhr"]
+[ext_resource type="Resource" uid="uid://bvscqc11sy88j" path="res://assets/units/default/precast.tres" id="15_m3udj"]
 [ext_resource type="Script" uid="uid://ch821oh3gbjup" path="res://game_actors/fsm/nfsm_leafs/precast.gd" id="15_w853h"]
-[ext_resource type="Resource" uid="uid://bvscqc11sy88j" path="res://assets/units/default/precast.tres" id="17_3njhr"]
+[ext_resource type="Script" uid="uid://csfpu7hhjcpsr" path="res://game_actors/fsm/nfsm_leafs/chase.gd" id="16_lj5kx"]
+[ext_resource type="Resource" uid="uid://djse3igwopgd2" path="res://assets/units/default/cast.tres" id="17_ag5lf"]
 [ext_resource type="Script" uid="uid://bb4pvywqlqxpd" path="res://game_actors/fsm/nfsm_leafs/cast.gd" id="17_sqovs"]
 [ext_resource type="Script" uid="uid://gfeij8146hvu" path="res://game_actors/fsm/nfsm_leafs/swing.gd" id="19_53fs4"]
-[ext_resource type="Resource" uid="uid://djse3igwopgd2" path="res://assets/units/default/cast.tres" id="19_m3udj"]
+[ext_resource type="Resource" uid="uid://coardc6brjl18" path="res://assets/units/default/idle.tres" id="20_7350n"]
 [ext_resource type="Script" uid="uid://ed8ls8ixvgl" path="res://game_actors/fsm/nfsm_leafs/hit.gd" id="20_cniqn"]
-[ext_resource type="Resource" uid="uid://bxx4tcanff175" path="res://assets/units/default/swing.tres" id="21_ag5lf"]
 [ext_resource type="Script" uid="uid://42clr85q46e" path="res://game_actors/fsm/nfsm_nodes/offfensive_node.gd" id="21_opia6"]
+[ext_resource type="Resource" uid="uid://qegh40g7nsrn" path="res://assets/units/default/move.tres" id="22_blgks"]
 [ext_resource type="Script" uid="uid://cw476dnuc5qw6" path="res://game_actors/fsm/nfsm_leafs/stunned.gd" id="22_p1xmw"]
-[ext_resource type="Resource" uid="uid://vrj3bnjkywem" path="res://assets/units/default/hit.tres" id="23_7350n"]
+[ext_resource type="Script" uid="uid://be10rb1te3on5" path="res://tools/fsm_tools/build_root.gd" id="24_toglx"]
 [ext_resource type="Script" uid="uid://c8ypbl1f0vk1c" path="res://game_actors/fsm/nfsm_nodes/alive_node.gd" id="24_vw3k6"]
-[ext_resource type="Resource" uid="uid://dwoytwgoqybdw" path="res://assets/units/default/stunned.tres" id="26_blgks"]
 
-[sub_resource type="Resource" id="Resource_4b8x2"]
-script = ExtResource("3_prr5r")
-visual_data = ExtResource("4_gj2p3")
+[sub_resource type="Resource" id="Resource_150sx"]
+script = ExtResource("22_p1xmw")
+lock_time = 0.9
+visual_data = ExtResource("6_hgsxe")
 
-[sub_resource type="Resource" id="Resource_prr5r"]
-script = ExtResource("5_hgsxe")
-visual_data = ExtResource("7_hgsxe")
-
-[sub_resource type="Resource" id="Resource_gj2p3"]
-script = ExtResource("7_ch47y")
+[sub_resource type="Resource" id="Resource_8mdmo"]
+script = ExtResource("16_lj5kx")
 visual_data = ExtResource("9_lj5kx")
 
-[sub_resource type="Resource" id="Resource_hgsxe"]
-script = ExtResource("9_m3udj")
-__build_states = Array[ExtResource("2_4b8x2")]([SubResource("Resource_prr5r"), SubResource("Resource_gj2p3")])
+[sub_resource type="Resource" id="Resource_g7m77"]
+script = ExtResource("19_53fs4")
+lock_time = 0.9
+visual_data = ExtResource("11_ch47y")
 
-[sub_resource type="Resource" id="Resource_lj5kx"]
-script = ExtResource("10_ag5lf")
-default_state = 1
-__build_states = Array[ExtResource("2_4b8x2")]([SubResource("Resource_prr5r")])
+[sub_resource type="Resource" id="Resource_ip2os"]
+script = ExtResource("20_cniqn")
+lock_time = 0.9
+visual_data = ExtResource("13_3njhr")
 
-[sub_resource type="Resource" id="Resource_ch47y"]
+[sub_resource type="Resource" id="Resource_27ert"]
+script = ExtResource("15_w853h")
+lock_time = 0.9
+visual_data = ExtResource("15_m3udj")
+
+[sub_resource type="Resource" id="Resource_8368y"]
+script = ExtResource("17_sqovs")
+lock_time = 0.9
+visual_data = ExtResource("17_ag5lf")
+
+[sub_resource type="Resource" id="Resource_d8ooh"]
 script = ExtResource("11_7350n")
-visual_data = ExtResource("9_lj5kx")
+visual_data = ExtResource("20_7350n")
 
-[sub_resource type="Resource" id="Resource_3njhr"]
+[sub_resource type="Resource" id="Resource_67cn8"]
+script = ExtResource("5_hgsxe")
+visual_data = ExtResource("22_blgks")
+
+[sub_resource type="Resource" id="Resource_5nec8"]
 script = ExtResource("12_blgks")
 default_state = 1
-__build_states = Array[ExtResource("2_4b8x2")]([SubResource("Resource_ch47y"), SubResource("Resource_prr5r")])
+states = Dictionary[int, ExtResource("2_4b8x2")]({
+0: SubResource("Resource_d8ooh"),
+1: SubResource("Resource_67cn8")
+})
 
-[sub_resource type="Resource" id="Resource_m3udj"]
-script = ExtResource("13_qnyw2")
-visual_data = ExtResource("15_ch47y")
-
-[sub_resource type="Resource" id="Resource_ag5lf"]
-script = ExtResource("15_w853h")
-visual_data = ExtResource("17_3njhr")
-
-[sub_resource type="Resource" id="Resource_7350n"]
-script = ExtResource("17_sqovs")
-visual_data = ExtResource("19_m3udj")
-
-[sub_resource type="Resource" id="Resource_blgks"]
-script = ExtResource("19_53fs4")
-visual_data = ExtResource("21_ag5lf")
-
-[sub_resource type="Resource" id="Resource_qnyw2"]
-script = ExtResource("20_cniqn")
-visual_data = ExtResource("23_7350n")
-
-[sub_resource type="Resource" id="Resource_0gu3j"]
+[sub_resource type="Resource" id="Resource_b0aw4"]
 script = ExtResource("21_opia6")
 default_state = 13
-__build_states = Array[ExtResource("2_4b8x2")]([SubResource("Resource_3njhr"), SubResource("Resource_m3udj"), SubResource("Resource_ag5lf"), SubResource("Resource_7350n"), SubResource("Resource_blgks"), SubResource("Resource_qnyw2")])
+states = Dictionary[int, ExtResource("2_4b8x2")]({
+2: SubResource("Resource_8mdmo"),
+3: SubResource("Resource_g7m77"),
+4: SubResource("Resource_ip2os"),
+5: SubResource("Resource_27ert"),
+6: SubResource("Resource_8368y"),
+13: SubResource("Resource_5nec8")
+})
 
-[sub_resource type="Resource" id="Resource_w853h"]
-script = ExtResource("22_p1xmw")
-visual_data = ExtResource("26_blgks")
+[sub_resource type="Resource" id="Resource_0lx45"]
+script = ExtResource("10_ag5lf")
+default_state = 1
+states = Dictionary[int, ExtResource("2_4b8x2")]({
+1: SubResource("Resource_67cn8")
+})
 
-[sub_resource type="Resource" id="Resource_hf68k"]
+[sub_resource type="Resource" id="Resource_3ey3m"]
+script = ExtResource("7_ch47y")
+lock_time = 0.9
+visual_data = ExtResource("20_7350n")
+
+[sub_resource type="Resource" id="Resource_ic0jq"]
+script = ExtResource("9_m3udj")
+states = Dictionary[int, ExtResource("2_4b8x2")]({
+0: SubResource("Resource_3ey3m"),
+1: SubResource("Resource_67cn8")
+})
+
+[sub_resource type="Resource" id="Resource_w8ods"]
 script = ExtResource("24_vw3k6")
 default_state = 10
-__build_states = Array[ExtResource("2_4b8x2")]([SubResource("Resource_hgsxe"), SubResource("Resource_lj5kx"), SubResource("Resource_0gu3j"), SubResource("Resource_w853h")])
+states = Dictionary[int, ExtResource("2_4b8x2")]({
+7: SubResource("Resource_150sx"),
+10: SubResource("Resource_b0aw4"),
+11: SubResource("Resource_0lx45"),
+12: SubResource("Resource_ic0jq")
+})
+
+[sub_resource type="Resource" id="Resource_p056e"]
+script = ExtResource("3_prr5r")
+lock_time = 0.9
+visual_data = ExtResource("4_gj2p3")
 
 [node name="FsmVisual" type="Node2D"]
+position = Vector2(43, 382)
 script = ExtResource("1_r0dlw")
 root = ExtResource("2_gj2p3")
 transitions = Dictionary[String, PackedStringArray]({
@@ -116,46 +144,50 @@ transitions = Dictionary[String, PackedStringArray]({
 })
 positions = Dictionary[String, Rect2]({
 "Root": Rect2(0, 583, 256, 96),
-"RootAliveState": Rect2(296, 636, 256, 96),
-"RootAliveStateOffensive": Rect2(592, 742, 256, 96),
-"RootAliveStateOffensiveCast": Rect2(888, 848, 256, 96),
-"RootAliveStateOffensiveChase": Rect2(888, 636, 256, 96),
-"RootAliveStateOffensiveHit": Rect2(888, 1060, 256, 96),
-"RootAliveStateOffensivePreCast": Rect2(888, 742, 256, 96),
-"RootAliveStateOffensiveSwing": Rect2(888, 954, 256, 96),
-"RootAliveStateOffensiveTravel": Rect2(888, 477, 256, 96),
-"RootAliveStateOffensiveTravelIdle": Rect2(1184, 424, 256, 96),
-"RootAliveStateOffensiveTravelMove": Rect2(1184, 530, 256, 96),
-"RootAliveStateRest": Rect2(592, 159, 256, 96),
-"RootAliveStateRestMove": Rect2(888, 106, 256, 96),
-"RootAliveStateRestWaitIdle": Rect2(888, 212, 256, 96),
-"RootAliveStateRetreat": Rect2(592, 318, 256, 96),
-"RootAliveStateRetreatMove": Rect2(888, 318, 256, 96),
-"RootAliveStateStunned": Rect2(592, 1166, 256, 96),
-"RootDying": Rect2(296, 0, 256, 96)
+"RootAliveState": Rect2(296, 530, 256, 96),
+"RootAliveStateOffensive": Rect2(592, 424, 256, 96),
+"RootAliveStateOffensiveCast": Rect2(888, 530, 256, 96),
+"RootAliveStateOffensiveChase": Rect2(888, 106, 256, 96),
+"RootAliveStateOffensiveHit": Rect2(888, 318, 256, 96),
+"RootAliveStateOffensivePreCast": Rect2(888, 424, 256, 96),
+"RootAliveStateOffensiveSwing": Rect2(888, 212, 256, 96),
+"RootAliveStateOffensiveTravel": Rect2(888, 689, 256, 96),
+"RootAliveStateOffensiveTravelIdle": Rect2(1184, 636, 256, 96),
+"RootAliveStateOffensiveTravelMove": Rect2(1184, 742, 256, 96),
+"RootAliveStateRest": Rect2(592, 1007, 256, 96),
+"RootAliveStateRestMove": Rect2(888, 1060, 256, 96),
+"RootAliveStateRestWaitIdle": Rect2(888, 954, 256, 96),
+"RootAliveStateRetreat": Rect2(592, 848, 256, 96),
+"RootAliveStateRetreatMove": Rect2(888, 848, 256, 96),
+"RootAliveStateStunned": Rect2(592, 0, 256, 96),
+"RootDying": Rect2(296, 1166, 256, 96)
 })
 scripts = Dictionary[String, ExtResource("2_4b8x2")]({
 "Root": ExtResource("2_gj2p3"),
-"RootAliveState": SubResource("Resource_hf68k"),
-"RootAliveStateOffensive": SubResource("Resource_0gu3j"),
-"RootAliveStateOffensiveCast": SubResource("Resource_7350n"),
-"RootAliveStateOffensiveChase": SubResource("Resource_m3udj"),
-"RootAliveStateOffensiveHit": SubResource("Resource_qnyw2"),
-"RootAliveStateOffensivePreCast": SubResource("Resource_ag5lf"),
-"RootAliveStateOffensiveSwing": SubResource("Resource_blgks"),
-"RootAliveStateOffensiveTravel": SubResource("Resource_3njhr"),
-"RootAliveStateOffensiveTravelIdle": SubResource("Resource_ch47y"),
-"RootAliveStateOffensiveTravelMove": SubResource("Resource_prr5r"),
-"RootAliveStateRest": SubResource("Resource_hgsxe"),
-"RootAliveStateRestMove": SubResource("Resource_prr5r"),
-"RootAliveStateRestWaitIdle": SubResource("Resource_gj2p3"),
-"RootAliveStateRetreat": SubResource("Resource_lj5kx"),
-"RootAliveStateRetreatMove": SubResource("Resource_prr5r"),
-"RootAliveStateStunned": SubResource("Resource_w853h"),
-"RootDying": SubResource("Resource_4b8x2")
+"RootAliveState": SubResource("Resource_w8ods"),
+"RootAliveStateOffensive": SubResource("Resource_b0aw4"),
+"RootAliveStateOffensiveCast": SubResource("Resource_8368y"),
+"RootAliveStateOffensiveChase": SubResource("Resource_8mdmo"),
+"RootAliveStateOffensiveHit": SubResource("Resource_ip2os"),
+"RootAliveStateOffensivePreCast": SubResource("Resource_27ert"),
+"RootAliveStateOffensiveSwing": SubResource("Resource_g7m77"),
+"RootAliveStateOffensiveTravel": SubResource("Resource_5nec8"),
+"RootAliveStateOffensiveTravelIdle": SubResource("Resource_d8ooh"),
+"RootAliveStateOffensiveTravelMove": SubResource("Resource_67cn8"),
+"RootAliveStateRest": SubResource("Resource_ic0jq"),
+"RootAliveStateRestMove": SubResource("Resource_67cn8"),
+"RootAliveStateRestWaitIdle": SubResource("Resource_3ey3m"),
+"RootAliveStateRetreat": SubResource("Resource_0lx45"),
+"RootAliveStateRetreatMove": SubResource("Resource_67cn8"),
+"RootAliveStateStunned": SubResource("Resource_150sx"),
+"RootDying": SubResource("Resource_p056e")
 })
 
-[node name="BuildRoot" parent="." node_paths=PackedStringArray("visual") instance=ExtResource("12_ncg65")]
-visual = NodePath("..")
+[node name="BuildCombatantRoot" type="Node2D" parent="." node_paths=PackedStringArray("fsm_visualizer")]
+script = ExtResource("24_toglx")
+fsm_visualizer = NodePath("..")
 assets_dir = "res://assets/units"
-unit_nom = "archer"
+unit_nom = "elf_troop"
+stun_is_idle = true
+wait_is_idle = true
+metadata/_custom_type_script = "uid://be10rb1te3on5"

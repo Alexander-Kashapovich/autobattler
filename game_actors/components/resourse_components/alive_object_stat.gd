@@ -21,5 +21,4 @@ func def_at(i:int) -> float:
 	return (1.0 - 100.0/(100.0 + i * 2.0))
 
 func shield_at(i:int) -> float:
-	@warning_ignore("integer_division")
-	return i/5
+	return int(i/5)

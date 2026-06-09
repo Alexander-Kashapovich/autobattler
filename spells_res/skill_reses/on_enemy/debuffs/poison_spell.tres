@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=8 format=3 uid="uid://bjnuf5f67tu0j"]
+
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="1_0a1wv"]
+[ext_resource type="Resource" uid="uid://c1o14s5rbmon0" path="res://spells_res/skill_reses/on_enemy/debuffs/poison_dart.tres" id="1_nefjp"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="2_7bopl"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="3_u5fwu"]
+[ext_resource type="AudioStream" uid="uid://c6bj060g2hr3u" path="res://assets/sound/poison_spit.mp3" id="4_ebbc2"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="4_fdn3i"]
+
+[sub_resource type="Resource" id="Resource_55dwe"]
+script = ExtResource("3_u5fwu")
+is_forced = true
+sounds = Array[AudioStream]([ExtResource("4_ebbc2")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[resource]
+script = ExtResource("1_0a1wv")
+nom = "Poison"
+sound = SubResource("Resource_55dwe")
+cd = 9.0
+cast_range = 350.0
+_skill = ExtResource("1_nefjp")
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

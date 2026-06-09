@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="UnitSpawnerData" load_steps=15 format=3 uid="uid://dsgo5dgduvp6"]
+
+[ext_resource type="Resource" uid="uid://utc801rv3t0r" path="res://spells_res/skill_reses/on_enemy/base_attacks/attack_skill.tres" id="1_7jv5h"]
+[ext_resource type="Resource" uid="uid://qj10lot7ijql" path="res://spawner/aseembling_data/units/elf_troop/elf_troop_root.tres" id="2_cuwo1"]
+[ext_resource type="Script" uid="uid://bovgs2er68716" path="res://spawner/spawner_data/unit_spawner_data.gd" id="3_cuwo1"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="4_pnq4f"]
+[ext_resource type="AudioStream" uid="uid://kfxyui73prqy" path="res://assets/sound/meat_hit.wav" id="5_eolqv"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="6_ldbwe"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="7_jiytb"]
+[ext_resource type="Resource" uid="uid://bjnuf5f67tu0j" path="res://spells_res/skill_reses/on_enemy/debuffs/poison_spell.tres" id="31_1chk5"]
+
+[sub_resource type="Resource" id="Resource_m6pv6"]
+script = ExtResource("4_pnq4f")
+sounds = Array[AudioStream]([ExtResource("5_eolqv")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_ld1np"]
+script = ExtResource("4_pnq4f")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_kk6he"]
+script = ExtResource("4_pnq4f")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_5q2mo"]
+script = ExtResource("4_pnq4f")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cuwo1"]
+
+[sub_resource type="Resource" id="Resource_pnq4f"]
+script = ExtResource("7_jiytb")
+texture = SubResource("PlaceholderTexture2D_cuwo1")
+
+[resource]
+script = ExtResource("3_cuwo1")
+fsm_root = ExtResource("2_cuwo1")
+attack = ExtResource("1_7jv5h")
+attack_range = 50.0
+nom = "Elf Trooper"
+spawner_assemblers = Array[int]([0, 1, 2, 3, 4, 6])
+max_hp = 90.0
+sound_data = Dictionary[int, ExtResource("4_pnq4f")]({
+0: SubResource("Resource_m6pv6"),
+1: SubResource("Resource_ld1np"),
+2: SubResource("Resource_kk6he"),
+3: SubResource("Resource_5q2mo")
+})
+spells = Dictionary[ExtResource("6_ldbwe"), bool]({
+ExtResource("31_1chk5"): true
+})
+texture = SubResource("Resource_pnq4f")
+vision = 500.0
+metadata/_custom_type_script = "uid://bovgs2er68716"

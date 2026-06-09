@@ -1,20 +1,25 @@
 extends Node
 class_name FSM
 #root
-var root:Root
+
+var root:State
+
 var bb:BlackBoard = BlackBoard.new()
 
-@warning_ignore("unused_signal")
 signal new_state(s:String)
 
-func start(ctx:StateContext) -> void:
-	root = root.duplicate_deep()
+func _ready() -> void:
+	set_physics_process(0)
+
+func start(ctx:UnitContext) -> void:
+	bb.ctx = ctx
 	root.fsm_init(ctx,bb)
 	root.control_flow_enter()
 	set_physics_process(1)
 
 func _physics_process(delta: float) -> void:
-	root.exec(delta)
+	#setted in root
+	bb.cur_state.exec(delta)
 
 #find first instance of ID
 func find_state(val:State.ID) -> State:

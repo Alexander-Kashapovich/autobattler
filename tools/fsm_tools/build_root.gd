@@ -1,9 +1,18 @@
 @tool
 extends Node2D
+class_name BuildCombatantRoot
 
-@export var visual:Node2D
+@export var fsm_visualizer:Node2D
 @export_dir var assets_dir:String
 @export var unit_nom:String
+
+@export_category("dbg")
+@export var chase_is_move:bool = 0
+@export var cast_is_hit:bool = 0
+@export var stun_is_idle:bool = 0
+@export var wait_is_idle:bool = 0
+
+@export var ranger:bool = 0
 
 @export_tool_button("go") var __asg = go
 func go() -> void:
@@ -11,7 +20,7 @@ func go() -> void:
 	
 	root.default_state = State.ID.OFFENSIVE
 	
-	#---leafs visual
+	#---leafs fsm_visualizer
 	var idle_t:StateVisualData = lsvd("idle")
 	var move_t:StateVisualData = lsvd("move")
 	var chase_t:StateVisualData = lsvd("chase")
@@ -26,7 +35,11 @@ func go() -> void:
 	var idle:State = Idle.new()
 	var move:State = Move.new()
 	
-	var chase:State = Chase.new()
+	var chase:State
+	if ranger:
+		chase = RangedChase.new()
+	else:
+		chase = Chase.new()
 	
 	var hit:State = Hit.new()
 	var swing:State = Swing.new()
@@ -39,23 +52,38 @@ func go() -> void:
 	
 	var stunned:Stunned = Stunned.new()
 	
-	#--set visual data
+	#--set fsm_visualizer data
 	idle.visual_data = idle_t
-	wait_idle.visual_data = idle_t
+	if wait_is_idle:
+		wait_idle.visual_data = idle_t
+	else:
+		wait_idle.visual_data = idle_t
 
 	move.visual_data = move_t
 	
-	chase.visual_data = chase_t
+	if chase_is_move:
+		chase.visual_data = move_t
+	else:
+		chase.visual_data = chase_t
 	
 	hit.visual_data = hit_t
 	swing.visual_data = swing_t
 	
-	cast.visual_data = hit_t
-	pre_cast.visual_data = swing_t
+	if cast_is_hit:
+		cast.visual_data = hit_t
+		pre_cast.visual_data = swing_t
+	else:
+		cast.visual_data = cast_t
+		pre_cast.visual_data = precast_t
+		
 	
 	dying.visual_data = dying_t
 	
-	stunned.visual_data = stunned_t
+	if stun_is_idle:
+		stunned.visual_data = idle_t
+	else:
+		stunned.visual_data = stunned_t
+
 	#--nodes
 	var alive:NFSMNode = AliveState.new()
 	alive.default_state = State.ID.OFFENSIVE
@@ -73,22 +101,26 @@ func go() -> void:
 	rest.default_state = State.ID.IDLE
 	
 	root.default_state = State.ID.ALIVE
-
-	root.__build_states = st([dying,alive])
-	alive.__build_states = st([rest,retreat,offensive,stunned])
-	rest.__build_states = st([move,wait_idle])
-	retreat.__build_states = st([move])
-	offensive.__build_states = st([travel,chase,pre_cast,cast,swing,hit])
-	travel.__build_states = st([idle,move])
 	
-	visual.root = root
-	visual.go()
+	setup_states(root,[dying,alive])
+	setup_states(alive,[rest,retreat,offensive,stunned])
+	setup_states(rest,[move,wait_idle])
+	setup_states(retreat,[move])
+	setup_states(offensive,[travel,chase,pre_cast,cast,swing,hit])
+	setup_states(travel,[idle,move])
+	
+	fsm_visualizer.root = root
+	fsm_visualizer.go()
 
 func st(a:Array) -> Array[State]:
 	var s:Array[State]
 	for i in a:
 		s.append(i)
 	return s
+
+func setup_states(dest:NFSMNode,states:Array[State]) -> void:
+	for s in states:
+		dest.states[s.get_id()] = s
 
 func lsvd(nom:String) -> StateVisualData:
 	return load(assets_dir.path_join(unit_nom).path_join(nom + ".tres"))

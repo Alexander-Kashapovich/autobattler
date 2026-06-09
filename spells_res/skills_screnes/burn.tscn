@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3wpqnei5b8gp"]
+
+[ext_resource type="Script" uid="uid://cah7kyilhoq3q" path="res://spells_res/skills_screnes/burn.gd" id="1_qq2dx"]
+
+[sub_resource type="Gradient" id="Gradient_8llh1"]
+offsets = PackedFloat32Array(0, 0.35449734, 0.66137564, 1)
+colors = PackedColorArray(1, 0.926183, 0.84234244, 1, 0.86775905, 0.54915506, 0, 1, 0.76427364, 0.34655395, 0.016436843, 0.7607843, 0.8403271, 0.2618797, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n4g43"]
+gradient = SubResource("Gradient_8llh1")
+width = 8
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.6111111)
+fill_to = Vector2(0.4957265, 0.0042735045)
+
+[sub_resource type="Gradient" id="Gradient_qq2dx"]
+colors = PackedColorArray(1, 0.7529412, 0.7137255, 0.6784314, 0.8171085, 0.8126884, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ep0g6"]
+gradient = SubResource("Gradient_qq2dx")
+width = 32
+
+[sub_resource type="Curve" id="Curve_8llh1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.44943827), -1.3279905, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n4g43"]
+width = 32
+curve = SubResource("Curve_8llh1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_idw3s"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(15, 1, 1)
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, -1, 0)
+spread = 8.0
+initial_velocity_min = 153.06999
+initial_velocity_max = 279.02
+scale_curve = SubResource("CurveTexture_n4g43")
+color_ramp = SubResource("GradientTexture1D_ep0g6")
+
+[node name="Burn" type="Node2D"]
+script = ExtResource("1_qq2dx")
+time = 2.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 32
+texture = SubResource("GradientTexture2D_n4g43")
+lifetime = 0.1
+explosiveness = 0.56
+process_material = SubResource("ParticleProcessMaterial_idw3s")

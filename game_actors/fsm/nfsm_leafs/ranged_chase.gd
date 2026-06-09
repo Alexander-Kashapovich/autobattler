@@ -1,3 +1,4 @@
+@tool
 extends Chase
 class_name RangedChase
 
@@ -5,10 +6,10 @@ class_name RangedChase
 
 func exec(delta:float) -> void:
 	
-	var target:Alived = ctx.target()
+	var target:Alive = ctx.target()
 	ctx.nv.update_moving_target(target)
 	
-	var vec:Vector2 = target.global_position - ctx.pawn.global_position
+	var vec:Vector2 = target.global_position - ctx.unit.global_position
 	var dist_sq:float = vec.length_squared()
 	var attack_rng:float = ctx.attack_comp.range_sq()
 	
@@ -18,11 +19,11 @@ func exec(delta:float) -> void:
 	
 	#backstep
 	elif dist_sq < (attack_rng * backstep_factor):
-		ctx.move(speed  * -vec.normalized())
-	#can attack
-	else:
+		ctx.nv.set_target_manual(ctx.unit.global_position + speed * -vec.normalized())
+		ctx.move(speed * ctx.nv.get_next_point_dir())
+	#can attack c 	else:
 		ctx.targeter.find_best_target()
-		if is_have_a_good_spell():
+		if bb.is_have_a_good_spell():
 			request_transition.emit(ID.PRECAST)
 		else:
 			#rotation

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sbs"
-run/main_scene="uid://bh5a8nfptduvn"
+run/main_scene="uid://loibxefe4jum"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,11 +19,24 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout=""
 
+[autoload]
+
+FXMng="*res://world/fx_mng.gd"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+
+[file_customization]
+
+folder_colors={
+"res://levels/": "purple",
+"res://spawner/aseembling_data/": "purple",
+"res://spells_res/": "purple",
+"res://tools/": "green"
+}
 
 [global_group]
 

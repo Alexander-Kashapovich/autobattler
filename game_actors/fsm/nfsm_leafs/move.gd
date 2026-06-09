@@ -1,7 +1,11 @@
+@tool
 extends LeafState
 class_name Move
 
 @export var speed:float = 130
+
+func get_id() -> ID:
+	return ID.MOVE
 
 func enter_update() -> void:
 	ctx.nv.target_reached.connect(on_target_reached)

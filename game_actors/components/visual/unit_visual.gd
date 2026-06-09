@@ -1,6 +1,6 @@
 extends VisualComp
 class_name UnitVisual
-##Rotation and animation
+## Rotation and animation
 
 enum AnimaType
 {
@@ -8,10 +8,14 @@ enum AnimaType
 	ONE_SHOT
 }
 
+## Point of casting. Visual may affect direction
+@export var cast_point:Node2D
+
 var animators:Dictionary[AnimaType,Animator]
 var cur_animator:Animator
 
 func _ready() -> void:
+	#need lazy conctucting
 	var l: = LoopAnimator.new(sp)
 	var on := OneShotAnimator.new(sp)
 	add_child(l)

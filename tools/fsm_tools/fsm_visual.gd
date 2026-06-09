@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@export var root: NFSMNode
+@export var root: Root
 
 @export var transitions: Dictionary[String,PackedStringArray]
 
@@ -20,18 +20,55 @@ func go():
 	_collect_transitions(root,"")
 	_layout(root, 0, 0,"")
 	queue_redraw()
+
+@export_tool_button("console_print") var __asdasgfabb = print_fsm
+func print_fsm() -> void:
+	print("\n=== FSM TREE STRUCTURE ===\n")
+	_print_node(root, "", true, "")
+	print("\n==========================\n")
+
+func _print_node(state: State, prefix: String, is_last: bool, path: String) -> void:
+	var connector := "└─ " if is_last else "├─ "
+	var full_path := path + "/" + state.nom()
+	if path.is_empty():
+		full_path = state.nom()
 	
+	var line := prefix + connector + full_nom(state)
+	
+	var trans = transitions[state.nom()]
+	if trans.size() > 0:
+		line += " [→ " + ", ".join(trans) + "]"
+	
+	if state is NFSMNode:
+		var default_id = state.default_state
+		var default_name = "?"
+		for child:State in state.states.values():
+			if child.get_id() == default_id:
+				default_name = child.nom()
+				break
+		line += "  (default: " + default_name + ")"
+	
+	print(line)
+	
+	if state is NFSMNode:
+		var new_prefix := prefix + ("    " if is_last else "│   ")
+		var sz:int = state.states.size()
+		for i in sz:
+			var child = state.states.values()[i]
+			var is_last_child:bool = (i == sz - 1)
+			_print_node(child, new_prefix, is_last_child, full_path)
+
 func _collect_transitions(state: State,prefix:String) -> void:
-	transitions[nom(state)] = _parse_request_transitions(state)
+	transitions[state.nom()] = _parse_request_transitions(state)
 
 	if state is NFSMNode:
-		for child in state.__build_states:
-			_collect_transitions(child,nom(state))
+		for child in state.states.values():
+			_collect_transitions(child,state.nom())
 
 func _layout(state: State, depth: int, y: int,prefix) -> int:
 	var x := depth * (NODE_SIZE.x + H_SPACING)
 	var rect := Rect2(Vector2(x, y), NODE_SIZE)
-	var full_name = prefix + nom(state)
+	var full_name = prefix + state.nom()
 	positions[full_name] = rect
 	scripts[full_name] = state
 	if state is NFSMNode:
@@ -39,7 +76,7 @@ func _layout(state: State, depth: int, y: int,prefix) -> int:
 		var first_child_y := y
 		var last_child_y := y
 
-		for child in state.__build_states:
+		for child in state.states.values():
 			child_y = _layout(child, depth + 1, child_y, full_name)
 			last_child_y = child_y - V_SPACING - NODE_SIZE.y
 
@@ -57,7 +94,6 @@ func _draw():
 		var state = scripts[state_name]
 
 		draw_rect(rect, Color(0.15, 0.15, 0.15), true)
-		draw_rect(rect, Color.WHITE, false, 2)
 		
 		draw_string(
 		ThemeDB.fallback_font,
@@ -67,17 +103,19 @@ func _draw():
 		NODE_SIZE.x - 20,
 		16
 		)
-	
+		
 		# default state (NFSMNode only)
 		if state is NFSMNode:
+			draw_rect(rect, Color.WHITE, false, 2)
 			_draw_node(rect,state)
 		
 		if state is LeafState:
+			draw_rect(rect, Color.GREEN_YELLOW, false, 2)
 			_draw_leaf(rect,state)
 
 		#transitions
 		var str:String = " -> [ "
-		for tr in transitions[nom(state)]:
+		for tr in transitions[state.nom()]:
 			str += tr + " "
 		str += "]"
 		
@@ -94,12 +132,12 @@ func _draw():
 		var state = scripts[state_name]
 		if state is NFSMNode:
 			var from_rect := positions[state_name]
-			for child in state.__build_states:
-				var to_rect := positions[state_name + nom(child)]
+			for child:State in state.states.values():
+				var to_rect := positions[state_name + child.nom()]
 				var color = Color.WHITE
 				var width = 2
 				
-				if State.dict[nom(child)] == state.default_state:
+				if child.get_id() == state.default_state:
 					color = Color.RED
 					width = 8
 				
@@ -112,8 +150,8 @@ func _draw():
 
 func _draw_node(rect:Rect2,state:NFSMNode) -> void:
 	var default_name := "BROKEN"
-	for child in state.__build_states:
-		var id:int = State.dict[nom(child)]
+	for child in state.states.values():
+		var id:int = state.get_id()
 		if id == state.default_state:
 			var id_str:String = State.ID.keys()[id]
 			default_name = id_str
@@ -151,10 +189,6 @@ func _parse_request_transitions(state: State) -> PackedStringArray:
 			res.append(id_name)
 	return res
 
-func nom(s:State) -> String:return s.get_script().get_global_name()
-
 func full_nom(s:State) -> String:
-	var nom:String = nom(s)
-	var id:int = State.dict[nom]
-	var id_str:String = State.ID.keys()[id]
-	return nom + "  {%s}" % id_str
+	var id_str:String = State.ID.keys()[s.get_id()]
+	return s.nom() + "  {%s}" % id_str

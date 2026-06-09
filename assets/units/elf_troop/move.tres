@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StateVisualData" load_steps=3 format=3 uid="uid://dc5emv744uyoq"]
+
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="1_am1if"]
+[ext_resource type="Texture2D" uid="uid://bxkoh6d0fk1rr" path="res://assets/units/elf_troop/move.png" id="2_7tocn"]
+
+[resource]
+script = ExtResource("1_am1if")
+texture = ExtResource("2_7tocn")
+frames = 4

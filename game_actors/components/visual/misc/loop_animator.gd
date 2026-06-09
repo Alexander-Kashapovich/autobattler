@@ -7,7 +7,7 @@ func _process(delta: float) -> void:
 	if _acc > spf:
 		_acc = 0
 		
-		if sp.frame + 1 == sp.hframes:
+		if (sp.frame + 1) == sp.hframes:
 			sp.frame = 0
 		else:
 			sp.frame += 1

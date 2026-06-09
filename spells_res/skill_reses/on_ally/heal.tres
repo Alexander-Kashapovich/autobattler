@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=14 format=3 uid="uid://ciqexahlfxxxw"]
+
+[ext_resource type="Script" uid="uid://4ik60cr210hr" path="res://game_actors/skills/skill.gd" id="1_t3pj2"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="3_uyp0g"]
+[ext_resource type="Script" uid="uid://m7f22dj513mf" path="res://game_actors/skills/effects/heal_effect.gd" id="4_2y10a"]
+[ext_resource type="PackedScene" uid="uid://qfax3quedeg8" path="res://spells_res/skills_screnes/heal.tscn" id="4_h3r25"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="5_156kp"]
+[ext_resource type="Script" uid="uid://dq3x0rnf8xa62" path="res://game_actors/skills/effects/add_fx_effect.gd" id="5_uyp0g"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="6_37bty"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="7_te064"]
+[ext_resource type="Script" uid="uid://cjgikubrjdxgh" path="res://game_actors/components/spell_targeting/selectors/hp_selector.gd" id="8_qaudx"]
+
+[sub_resource type="Resource" id="Resource_g0aex"]
+script = ExtResource("4_2y10a")
+val = 5.0
+metadata/_custom_type_script = "uid://m7f22dj513mf"
+
+[sub_resource type="Resource" id="Resource_2y10a"]
+script = ExtResource("5_uyp0g")
+fx_scene = ExtResource("4_h3r25")
+metadata/_custom_type_script = "uid://dq3x0rnf8xa62"
+
+[sub_resource type="Resource" id="Resource_h3r25"]
+script = ExtResource("1_t3pj2")
+target_effects = Array[ExtResource("3_uyp0g")]([SubResource("Resource_g0aex"), SubResource("Resource_2y10a")])
+metadata/_custom_type_script = "uid://4ik60cr210hr"
+
+[sub_resource type="Resource" id="Resource_y542t"]
+script = ExtResource("8_qaudx")
+hp_threshold = 0.6
+metadata/_custom_type_script = "uid://cjgikubrjdxgh"
+
+[resource]
+script = ExtResource("6_37bty")
+nom = "Heal"
+cd = 12.0
+cast_range = 300.0
+_skill = SubResource("Resource_h3r25")
+on_ally = true
+on_self = true
+selectors = Array[ExtResource("7_te064")]([SubResource("Resource_y542t")])
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

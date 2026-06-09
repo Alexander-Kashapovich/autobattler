@@ -1,6 +1,7 @@
 @tool
 extends Effect
 class_name SpawnEffect
+## Affect caster
 
 @export var data:SpawnerData
 @export var scene:PackedScene
@@ -12,16 +13,11 @@ func _base_evaluate() -> float:
 func execute(c:SkillExecutionContext) -> void:
 	for i in count:
 		var spawner = Spawner.new()
-		spawner.fraction = c.fraction
+		spawner.team = c.caster.team
 		spawner.actor_scene = scene
 		spawner.data = data
 		
-		#---пиздец
-		spawner.executors = ([UnitSpawnerExecutor.new()] as Array[SpawnerExecutor])
-		#---
-		
-		spawner.global_position = c.cast_point
-		spawner.mng = c.caster.mng
+		spawner.global_position = c.get_cast_point()
 		
 		spawner.visible = 0
 	

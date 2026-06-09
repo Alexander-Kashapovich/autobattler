@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BarrackSpawnerData" load_steps=8 format=3 uid="uid://doo76bmv2ejbx"]
+
+[ext_resource type="Script" uid="uid://cpjx4temegckr" path="res://spawner/spawner_data/barrack_spawner_data.gd" id="1_bv4d4"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="2_m0mgb"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="3_j3ljx"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="4_6qrfe"]
+[ext_resource type="Resource" uid="uid://86chmylr0o6s" path="res://spells_res/skill_reses/only_self_skills/spawn/spawn_wizard.tres" id="4_j3ljx"]
+[ext_resource type="Texture2D" uid="uid://dk1o47c68bwe1" path="res://assets/dbg_trash/wizard_barrack.png" id="6_6qrfe"]
+
+[sub_resource type="Resource" id="Resource_fxyng"]
+script = ExtResource("4_6qrfe")
+texture = ExtResource("6_6qrfe")
+metadata/_custom_type_script = "uid://d2km05mxcm56e"
+
+[resource]
+script = ExtResource("1_bv4d4")
+nom = "Wizard Barrack"
+is_building = true
+spawner_assemblers = Array[int]([0, 1, 5, 6])
+spells = Dictionary[ExtResource("3_j3ljx"), bool]({
+ExtResource("4_j3ljx"): true
+})
+texture = SubResource("Resource_fxyng")
+metadata/_custom_type_script = "uid://cpjx4temegckr"

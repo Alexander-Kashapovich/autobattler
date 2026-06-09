@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnubacjcpd6wk"]
+
+[ext_resource type="Script" uid="uid://dg8bpxoshnqy2" path="res://game_actors/skills/skill_scenes/curve_projectile.gd" id="1_emu6l"]
+
+[sub_resource type="Gradient" id="Gradient_fakwi"]
+colors = PackedColorArray(0, 1, 0, 1, 0.29411766, 0.53333336, 0.16078432, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yeu3x"]
+gradient = SubResource("Gradient_fakwi")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.47008547, 0.48290598)
+fill_to = Vector2(0.517094, 0)
+
+[node name="PoisonDart" type="Node2D"]
+script = ExtResource("1_emu6l")
+
+[node name="ColorRect" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_yeu3x")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 103.45
+color = Color(0.26666668, 0.92941177, 0.20392157, 1)

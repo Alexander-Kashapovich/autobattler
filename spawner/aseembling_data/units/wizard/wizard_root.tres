@@ -1,0 +1,119 @@
+[gd_resource type="Resource" script_class="Root" load_steps=40 format=3 uid="uid://b1wfe1dfpgei0"]
+
+[ext_resource type="Script" uid="uid://ljkk7lvjqgaa" path="res://game_actors/fsm/nfsm_nodes/root_node.gd" id="1_yss3y"]
+[ext_resource type="Script" uid="uid://b4m8en5a83c0l" path="res://game_actors/fsm/state.gd" id="2_yoenk"]
+[ext_resource type="Script" uid="uid://bi00tsiv15smh" path="res://game_actors/fsm/nfsm_leafs/dying.gd" id="3_mq33x"]
+[ext_resource type="Resource" uid="uid://bvt3fbcqpdasv" path="res://assets/units/misc/die.tres" id="4_8o1qk"]
+[ext_resource type="Script" uid="uid://c8ypbl1f0vk1c" path="res://game_actors/fsm/nfsm_nodes/alive_node.gd" id="5_dke4y"]
+[ext_resource type="Script" uid="uid://b1w5hcbqepsai" path="res://game_actors/fsm/nfsm_nodes/rest_node.gd" id="6_hbxep"]
+[ext_resource type="Script" uid="uid://dhngvvkemgpyq" path="res://game_actors/fsm/nfsm_leafs/move.gd" id="7_qh2pq"]
+[ext_resource type="Resource" uid="uid://b2r3fmiaasoq7" path="res://assets/units/wizard/move.tres" id="8_qkjpe"]
+[ext_resource type="Script" uid="uid://c8m721r7tj42j" path="res://game_actors/fsm/nfsm_leafs/wait_idle.gd" id="9_is0uh"]
+[ext_resource type="Resource" uid="uid://ljfjd1cq4wtk" path="res://assets/units/wizard/idle.tres" id="10_sxttw"]
+[ext_resource type="Script" uid="uid://c51ss8vatgmc8" path="res://game_actors/fsm/nfsm_nodes/retreat_node.gd" id="11_mcdy0"]
+[ext_resource type="Script" uid="uid://42clr85q46e" path="res://game_actors/fsm/nfsm_nodes/offfensive_node.gd" id="12_x4d5q"]
+[ext_resource type="Script" uid="uid://rwauchcnlg3i" path="res://game_actors/fsm/nfsm_nodes/travel_node.gd" id="13_a0jjr"]
+[ext_resource type="Script" uid="uid://dtarjb3ipqchs" path="res://game_actors/fsm/nfsm_leafs/idle.gd" id="14_jcin6"]
+[ext_resource type="Script" uid="uid://c6n8wwnwmgaph" path="res://game_actors/fsm/nfsm_leafs/ranged_chase.gd" id="15_2mu2p"]
+[ext_resource type="Resource" uid="uid://bdaqpi0bd3evk" path="res://assets/units/wizard/chase.tres" id="16_fpavi"]
+[ext_resource type="Script" uid="uid://ch821oh3gbjup" path="res://game_actors/fsm/nfsm_leafs/precast.gd" id="17_on6ni"]
+[ext_resource type="Resource" uid="uid://di8udt0127i2y" path="res://assets/units/wizard/swing.tres" id="18_j5g6t"]
+[ext_resource type="Script" uid="uid://bb4pvywqlqxpd" path="res://game_actors/fsm/nfsm_leafs/cast.gd" id="19_toy28"]
+[ext_resource type="Resource" uid="uid://cdr3wugltr1s2" path="res://assets/units/wizard/hit.tres" id="20_cf0p7"]
+[ext_resource type="Script" uid="uid://gfeij8146hvu" path="res://game_actors/fsm/nfsm_leafs/swing.gd" id="21_eqc3o"]
+[ext_resource type="Script" uid="uid://ed8ls8ixvgl" path="res://game_actors/fsm/nfsm_leafs/hit.gd" id="22_6rrpp"]
+[ext_resource type="Script" uid="uid://cw476dnuc5qw6" path="res://game_actors/fsm/nfsm_leafs/stunned.gd" id="23_vq483"]
+[ext_resource type="Resource" uid="uid://d36gpnr2mu54d" path="res://assets/units/wizard/stunned.tres" id="24_h3qo8"]
+
+[sub_resource type="Resource" id="Resource_g66uq"]
+script = ExtResource("23_vq483")
+visual_data = ExtResource("24_h3qo8")
+
+[sub_resource type="Resource" id="Resource_rwsey"]
+script = ExtResource("15_2mu2p")
+visual_data = ExtResource("16_fpavi")
+
+[sub_resource type="Resource" id="Resource_6eeek"]
+script = ExtResource("21_eqc3o")
+lock_time = 1.0
+visual_data = ExtResource("18_j5g6t")
+
+[sub_resource type="Resource" id="Resource_ky267"]
+script = ExtResource("22_6rrpp")
+visual_data = ExtResource("20_cf0p7")
+
+[sub_resource type="Resource" id="Resource_eqjfs"]
+script = ExtResource("17_on6ni")
+visual_data = ExtResource("18_j5g6t")
+
+[sub_resource type="Resource" id="Resource_s88aw"]
+script = ExtResource("19_toy28")
+visual_data = ExtResource("20_cf0p7")
+
+[sub_resource type="Resource" id="Resource_qwp3u"]
+script = ExtResource("14_jcin6")
+visual_data = ExtResource("10_sxttw")
+
+[sub_resource type="Resource" id="Resource_to2kh"]
+script = ExtResource("7_qh2pq")
+visual_data = ExtResource("8_qkjpe")
+
+[sub_resource type="Resource" id="Resource_qhkmw"]
+script = ExtResource("13_a0jjr")
+default_state = 1
+states = Dictionary[int, ExtResource("2_yoenk")]({
+0: SubResource("Resource_qwp3u"),
+1: SubResource("Resource_to2kh")
+})
+
+[sub_resource type="Resource" id="Resource_neram"]
+script = ExtResource("12_x4d5q")
+default_state = 13
+states = Dictionary[int, ExtResource("2_yoenk")]({
+2: SubResource("Resource_rwsey"),
+3: SubResource("Resource_6eeek"),
+4: SubResource("Resource_ky267"),
+5: SubResource("Resource_eqjfs"),
+6: SubResource("Resource_s88aw"),
+13: SubResource("Resource_qhkmw")
+})
+
+[sub_resource type="Resource" id="Resource_kf0y6"]
+script = ExtResource("11_mcdy0")
+default_state = 1
+states = Dictionary[int, ExtResource("2_yoenk")]({
+1: SubResource("Resource_to2kh")
+})
+
+[sub_resource type="Resource" id="Resource_acswd"]
+script = ExtResource("9_is0uh")
+visual_data = ExtResource("10_sxttw")
+
+[sub_resource type="Resource" id="Resource_wa5i2"]
+script = ExtResource("6_hbxep")
+states = Dictionary[int, ExtResource("2_yoenk")]({
+0: SubResource("Resource_acswd"),
+1: SubResource("Resource_to2kh")
+})
+
+[sub_resource type="Resource" id="Resource_44bnj"]
+script = ExtResource("5_dke4y")
+default_state = 10
+states = Dictionary[int, ExtResource("2_yoenk")]({
+7: SubResource("Resource_g66uq"),
+10: SubResource("Resource_neram"),
+11: SubResource("Resource_kf0y6"),
+12: SubResource("Resource_wa5i2")
+})
+
+[sub_resource type="Resource" id="Resource_53xvh"]
+script = ExtResource("3_mq33x")
+visual_data = ExtResource("4_8o1qk")
+
+[resource]
+script = ExtResource("1_yss3y")
+default_state = 8
+states = Dictionary[int, ExtResource("2_yoenk")]({
+8: SubResource("Resource_44bnj"),
+9: SubResource("Resource_53xvh")
+})

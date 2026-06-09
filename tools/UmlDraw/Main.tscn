@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://boa6x5b7b42aa"]
+
+[ext_resource type="Script" uid="uid://dmd543fwd4eq5" path="res://tools/UmlDraw/UML_main.gd" id="1_0y7bk"]
+
+[node name="UmlDraw" type="Node2D" node_paths=PackedStringArray("boxes_dest")]
+script = ExtResource("1_0y7bk")
+print_vars = false
+boxes_dest = NodePath("Boxes")
+metadata/_edit_lock_ = true
+
+[node name="Boxes" type="Node" parent="."]

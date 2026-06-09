@@ -1,33 +1,33 @@
 extends Caster
 class_name Unit
 
-var rank:RankComp
 @export var fsm:FSM
 @export var blood_fx:UnitBlood
-@export var fraction_shadow:ColorRect
+@export var team_shadow:ColorRect
+
+var rank:RankComp = RankComp.new()
 signal stunned
 
-func set_fraction(i:int) -> void:
-	fraction = i
-	fraction_shadow.color = Spawner.frac_colors[i]
+func _ready() -> void:
+	team_setted.connect(_on_team_setted)
+	damaged.connect(_on_damaged)
+	rank.level_upped.connect(_on_level_up)
 
-func apply_damage(val:float) -> void:
-	hp.force_decrease(val)
+func _on_team_setted(i:Team) -> void:
+	team_shadow.color = team.color
+
+func _on_damaged(val:float) -> void:
 	blood_fx.set_blood(hp.percentage())
 	rank.add_exp(val * 0.5)
-	sound.exec(SoundComp.S.HURT)
 
 func add_exp(val:float) -> void:
 	rank.add_exp(val)
 
-func level_up(i:int) -> void:
+func _on_level_up(i:int) -> void:
 	stats.level_up(i)
 	caster_stats.level_up(i)
+	update_name()
 
-	if name.find("[R") != -1:
-		name = name.substr(0, name.find("[R")).strip_edges()
-
-	name = "%s [R%s]" % [name, rank.rank]
-	
 func on_died() -> void:
-	fraction_shadow.visible = 0
+	team_shadow.visible = 0
+	FXMng.add_blood(global_position)

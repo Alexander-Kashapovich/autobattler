@@ -1,56 +1,51 @@
-@icon("res://editor_assets/spawner_icon.svg")
+@icon("res://assets/editor_assets/spawner_icon.svg")
 @tool
+@static_unload
 extends Sprite2D
 class_name Spawner
 
-static var frac_colors:Dictionary[int,Color] = {
-	0:Color.RED,
-	1:Color.BLUE,
-	2:Color.VIOLET,
-	3:Color.YELLOW
+enum SpawnerAssemblerID
+{
+	ALIVE,
+	CASTER,
+	
+	TARGETING,
+	ALLY_TARGETING,
+	
+	UNIT,
+	
+	STATIC,
+	
+	GUI
 }
 
-static var frac_names:Dictionary[int,PackedStringArray]= {
-   0: [
-   	"Rage","Brut","Skull","Fang","Ash","Blood","Iron","Ruin","Claw","Gore",
-   	"Hammer","Wrath","Spike","Grim","Crash","Maul","Break","Howl","Ripper","Scar"
-   ],
-   1: [
-   	"Aqua","Pulse","Nova","Wave","Ion","Flux","Spark","Stream","Arc","Bolt",
-   	"Signal","Echo","Glide","Shift","Phase","Core","Beam","Drift","Surge","Flow"
-   ],
-   2: [
-   	"Void","Hex","Shade","Viper","Crow","Night","Venom","Witch","Oblivion","Feral",
-   	"Specter","Ghost","Curse","Rune","Blight","Phantom","Reaper","Noir","Abyss","Whisper"
-   ],
-   3: [
-   	"Gold","Sun","Pride","Flare","Crown","Valor","Shield","Glory","Lion","Banner",
-   	"Radiant","Honor","Blaze","Torch","Aegis","Triumph","Regal","Bright","Halo","Oath"
-   ]
+static var SpawnerAssemblers:Dictionary[SpawnerAssemblerID,SpawnerAssembler] = {
+	SpawnerAssemblerID.ALIVE : AliveSpawnerAssembler.new(),
+	SpawnerAssemblerID.CASTER : CasterSpawnerAssembler.new(),
+	
+	SpawnerAssemblerID.TARGETING : TargeterSpawnerAssembler.new(),
+	SpawnerAssemblerID.ALLY_TARGETING : AllyTargeterSpawnerAssembler.new(),
+	
+	SpawnerAssemblerID.UNIT : UnitSpawnerAssembler.new(),
+	SpawnerAssemblerID.STATIC : StaticSpawnerAssembler.new(),
+	SpawnerAssemblerID.GUI : GUISpawnerAssembler.new()
 }
 
-static var frac_labels:Dictionary[int,String]= {
-   0: "RED",
-   1: "BLUE",
-   2: "VIOLET",
-   3: "YELLOW"
-}
+static var alive_id:int = 0
 
-
-@export var fraction:int:
+@export var team:Team:
 	set(val):
-		fraction = val
+		team = val
+		_upd_editor_name()
 		queue_redraw()
 
-@export var mng:BattleMng
-@export var executors:Array[SpawnerExecutor]
 @export var actor_scene:PackedScene
 @export var data:SpawnerData:
 	set(val):
 		data = val
 		if not data:return
-		upd_draw()
-		name = data.nom
+		_upd_draw()
+		_upd_editor_name()
 		if not data.is_building: return
 		add_to_group("nv_geom")
 		var sz:Vector2 = data.texture.texture.get_size();
@@ -63,14 +58,47 @@ static var frac_labels:Dictionary[int,String]= {
 
 @export var vertices:PackedVector2Array = []
 
-@export var auto_activate:bool = 0
-func _ready() -> void:
-	if auto_activate and not Engine.is_editor_hint():
-		if not mng.is_world_ready:
-			await mng.world_ready
-		spawn()
+func spawn() -> void:
+	var actor:Alive = actor_scene.instantiate()
 
-func upd_draw() -> void:
+	#have some @onready vars
+	add_sibling(actor)
+	
+	#set context
+	_pre_enter_execute(actor)
+	#register affect team counter. Registration require setted position
+	_register(actor)
+	
+	for id in data.spawner_assemblers:
+		SpawnerAssemblers[id].execute(actor,data)
+	
+
+
+	queue_free()
+
+func start_yield(val:float) -> void:
+	get_tree().create_timer(val).timeout.connect(spawn)
+
+func _register(actor:Alive) -> void:
+	if data.is_building:
+		team.register_building(actor)
+	else:
+		team.register_unit(actor)
+
+func _pre_enter_execute(actor:Alive) -> void:
+	actor.global_position = global_position
+	actor.set_team(team)
+	actor.team = team
+
+	var nom:NomComp = NomComp.new()
+	nom.nom = data.nom
+	nom.id = alive_id
+	alive_id += 1
+	nom.prefix = team.name.trim_prefix("Team")
+	actor.nom = nom
+	actor.update_name()
+
+func _upd_draw() -> void:
 	centered = false
 	texture = data.texture.texture
 	offset = Vector2(
@@ -78,41 +106,13 @@ func upd_draw() -> void:
 		-texture.get_height())
 	queue_redraw()
 
+func _upd_editor_name() -> void:
+	if data and team:
+		name = data.nom + " " + team.name.trim_prefix("Team")
+	else:
+		name = "NULL"
+
 func _draw() -> void:
 	if data:
-		modulate = frac_colors[fraction]
+		modulate = team.color
 		draw_circle(Vector2.ZERO,data.vision,Color.WHITE,0,1)
-
-func spawn() -> void:
-	var actor:Alived = actor_scene.instantiate()
-	_pre_enter_execute(actor)
-	
-	add_sibling(actor)
-	
-	for e in executors:
-		actor = e.execute(actor,data)
-
-	register(actor)
-	queue_free()
-
-func start_yield(val:float) -> void:
-	get_tree().create_timer(val).timeout.connect(spawn)
-
-func register(actor:Alived) -> void:
-	if data.is_building:
-		mng.teams[fraction].register_building(actor)
-	else:
-		mng.teams[fraction].register_unit(actor)
-
-func _pre_enter_execute(actor:Alived) -> void:
-	actor.global_position = global_position
-	actor.set_fraction(fraction)
-	actor.set_collision_layer_value(fraction + 1,1)
-	actor.mng = mng
-	var idx:int = hash(actor) % frac_names[fraction].size()
-
-	actor.name = "%s %s [%s]" % [
-		data.nom,
-		frac_names[fraction][idx],
-		frac_labels[fraction]
-		]

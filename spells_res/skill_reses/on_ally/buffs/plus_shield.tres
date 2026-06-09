@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=12 format=3 uid="uid://bsilg8kj72ffl"]
+
+[ext_resource type="Script" uid="uid://4ik60cr210hr" path="res://game_actors/skills/skill.gd" id="1_tkmir"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="2_p2plo"]
+[ext_resource type="Script" uid="uid://bo0pkot40aeah" path="res://game_actors/skills/effects/increase_caster_stat.gd" id="3_7hayn"]
+[ext_resource type="Script" uid="uid://26jw42og1qgp" path="res://game_actors/skills/skills_types/buff.gd" id="4_moafw"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="5_7hayn"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="5_sdmvq"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="7_moafw"]
+
+[sub_resource type="Resource" id="Resource_6xwnv"]
+script = ExtResource("3_7hayn")
+shield_val = -10.0
+metadata/_custom_type_script = "uid://bo0pkot40aeah"
+
+[sub_resource type="Resource" id="Resource_5u43w"]
+script = ExtResource("1_tkmir")
+target_effects = Array[ExtResource("2_p2plo")]([SubResource("Resource_6xwnv")])
+metadata/_custom_type_script = "uid://4ik60cr210hr"
+
+[sub_resource type="Resource" id="Resource_6n1jl"]
+script = ExtResource("3_7hayn")
+shield_val = 10.0
+metadata/_custom_type_script = "uid://bo0pkot40aeah"
+
+[sub_resource type="Resource" id="Resource_mqque"]
+script = ExtResource("4_moafw")
+time = 15.0
+end_skill = SubResource("Resource_5u43w")
+target_effects = Array[ExtResource("2_p2plo")]([SubResource("Resource_6n1jl")])
+metadata/_custom_type_script = "uid://26jw42og1qgp"
+
+[resource]
+script = ExtResource("5_sdmvq")
+nom = "Add Shield"
+cd = 15.0
+cast_range = 400.0
+_skill = SubResource("Resource_mqque")
+on_ally = true
+on_self = true
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

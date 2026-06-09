@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AOESkill" load_steps=8 format=3 uid="uid://cfjb33ctlcuhf"]
+
+[ext_resource type="Script" uid="uid://cht0e4eoscsap" path="res://game_actors/skills/skills_types/aoe.gd" id="1_bapu2"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="2_avd5v"]
+[ext_resource type="PackedScene" uid="uid://c3wpqnei5b8gp" path="res://spells_res/skills_screnes/burn.tscn" id="3_2xbfl"]
+[ext_resource type="Script" uid="uid://dq3x0rnf8xa62" path="res://game_actors/skills/effects/add_fx_effect.gd" id="4_fl3rn"]
+[ext_resource type="Script" uid="uid://c6qd6b8pvhcym" path="res://game_actors/skills/effects/dmg_effect.gd" id="5_coq8g"]
+
+[sub_resource type="Resource" id="Resource_yg3sb"]
+script = ExtResource("4_fl3rn")
+fx_scene = ExtResource("3_2xbfl")
+metadata/_custom_type_script = "uid://dq3x0rnf8xa62"
+
+[sub_resource type="Resource" id="Resource_kdnxr"]
+script = ExtResource("5_coq8g")
+val = 9.0
+bonus_value = 1.0
+metadata/_custom_type_script = "uid://c6qd6b8pvhcym"
+
+[resource]
+script = ExtResource("1_bapu2")
+radius = 50.0
+target_effects = Array[ExtResource("2_avd5v")]([SubResource("Resource_yg3sb"), SubResource("Resource_kdnxr")])
+bonus_value = 5.0
+metadata/_custom_type_script = "uid://cht0e4eoscsap"

@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="UnitSpawnerData" load_steps=14 format=3 uid="uid://bjra8cb3q2rfj"]
+
+[ext_resource type="Script" uid="uid://bovgs2er68716" path="res://spawner/spawner_data/unit_spawner_data.gd" id="1_7o1lh"]
+[ext_resource type="Resource" uid="uid://utc801rv3t0r" path="res://spells_res/skill_reses/on_enemy/base_attacks/attack_skill.tres" id="1_kjokq"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="2_4hakr"]
+[ext_resource type="Resource" uid="uid://co00w2vf1n5ge" path="res://spawner/aseembling_data/units/trooper/trooper_root.tres" id="2_ptx5x"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="3_d0ujm"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="4_4hakr"]
+[ext_resource type="AudioStream" uid="uid://kfxyui73prqy" path="res://assets/sound/meat_hit.wav" id="5_ptx5x"]
+[ext_resource type="Texture2D" uid="uid://y1n5dcuqdlpr" path="res://assets/dbg_trash/default.png" id="8_m6pv6"]
+
+[sub_resource type="Resource" id="Resource_m6pv6"]
+script = ExtResource("2_4hakr")
+sounds = Array[AudioStream]([ExtResource("5_ptx5x")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_ld1np"]
+script = ExtResource("2_4hakr")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_kk6he"]
+script = ExtResource("2_4hakr")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_5q2mo"]
+script = ExtResource("2_4hakr")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="Resource" id="Resource_kjokq"]
+script = ExtResource("4_4hakr")
+texture = ExtResource("8_m6pv6")
+
+[resource]
+script = ExtResource("1_7o1lh")
+fsm_root = ExtResource("2_ptx5x")
+attack = ExtResource("1_kjokq")
+attack_range = 50.0
+nom = "Trooper"
+spawner_assemblers = Array[int]([0, 1, 2, 3, 4, 6])
+sound_data = Dictionary[int, ExtResource("2_4hakr")]({
+0: SubResource("Resource_m6pv6"),
+1: SubResource("Resource_ld1np"),
+2: SubResource("Resource_kk6he"),
+3: SubResource("Resource_5q2mo")
+})
+texture = SubResource("Resource_kjokq")
+vision = 500.0
+metadata/_custom_type_script = "uid://bovgs2er68716"

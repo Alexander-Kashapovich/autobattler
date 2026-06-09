@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=13 format=3 uid="uid://bhojesucmen73"]
+
+[ext_resource type="Script" uid="uid://4ik60cr210hr" path="res://game_actors/skills/skill.gd" id="1_53hxm"]
+[ext_resource type="Script" uid="uid://xlrjfirdp2ey" path="res://game_actors/skills/effect.gd" id="2_uldlq"]
+[ext_resource type="Resource" uid="uid://camgntf6skhs7" path="res://spawner/aseembling_data/units/archer/archer_data.tres" id="3_53hxm"]
+[ext_resource type="PackedScene" uid="uid://cs35vy85mm67i" path="res://spawner/aseembling_data/units/unit_sc.tscn" id="4_uldlq"]
+[ext_resource type="Script" uid="uid://bjcguf5w6k2pb" path="res://game_actors/skills/effects/spawn_effect.gd" id="5_ka37w"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="6_sa80y"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="7_w0ovb"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="8_y8mmo"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="9_awlcy"]
+
+[sub_resource type="Resource" id="Resource_3c88k"]
+script = ExtResource("5_ka37w")
+data = ExtResource("3_53hxm")
+scene = ExtResource("4_uldlq")
+metadata/_custom_type_script = "uid://bjcguf5w6k2pb"
+
+[sub_resource type="Resource" id="Resource_62s10"]
+script = ExtResource("1_53hxm")
+target_effects = Array[ExtResource("2_uldlq")]([SubResource("Resource_3c88k")])
+metadata/_custom_type_script = "uid://4ik60cr210hr"
+
+[sub_resource type="Resource" id="Resource_v4s21"]
+script = ExtResource("9_awlcy")
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[resource]
+script = ExtResource("7_w0ovb")
+nom = "Spawn Archer"
+sound = SubResource("Resource_v4s21")
+cd = 5.0
+_skill = SubResource("Resource_62s10")
+on_self = true
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

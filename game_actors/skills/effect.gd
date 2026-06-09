@@ -2,10 +2,14 @@
 @tool
 extends Resource
 class_name Effect
+## Independent quantum of any Skill. Executed at same frame. No personal data
 
+@export_group("Evaluting")
+## Added to total value
 @export var bonus_value:float = 0
-@export var _base_value:float = -INF
+var _base_value:float = -INF
 
+## Must be called once in spawner
 func base_evaluate() -> float:
 	_base_value = _base_evaluate()
 	_base_value += bonus_value

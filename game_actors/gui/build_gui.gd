@@ -9,6 +9,8 @@ func setup() -> void:
 	build.mouse_entered.connect(on)
 	build.mouse_exited.connect(off)
 	hp_bar.setup(build.hp)
+#!!!!!
+	off()
 
 func on() -> void:
 	visible = 1 
@@ -20,9 +22,9 @@ func off() -> void:
 func _draw() -> void:
 	if not visible: return
 
-	var color = Spawner.frac_colors[build.fraction]
+	var color = build.team.color
 
-	for s in spells.get_spells():
+	for s in spells.get_ready_spells():
 		var r = s.cast_range
 		draw_circle(Vector2.ZERO,r,color,0,1)
 	

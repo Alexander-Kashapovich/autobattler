@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="UnitSpawnerData" load_steps=12 format=3 uid="uid://cacncpbeeavn2"]
+
+[ext_resource type="Resource" uid="uid://41pad2gnbiiv" path="res://spells_res/skill_reses/on_enemy/base_attacks/fireball_skill.tres" id="1_nt7qw"]
+[ext_resource type="Resource" uid="uid://b1wfe1dfpgei0" path="res://spawner/aseembling_data/units/wizard/wizard_root.tres" id="2_nt7qw"]
+[ext_resource type="Script" uid="uid://bovgs2er68716" path="res://spawner/spawner_data/unit_spawner_data.gd" id="3_ciwbb"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="4_uahgf"]
+[ext_resource type="AudioStream" uid="uid://ca5kukbd40ggw" path="res://assets/sound/fireball_throw.mp3" id="5_eo5i4"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="6_qqbnj"]
+[ext_resource type="Resource" uid="uid://3ajhqsddfowh" path="res://spells_res/skill_reses/on_enemy/aoe/burn_spell.tres" id="7_ciwbb"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="7_r1mty"]
+
+[sub_resource type="Resource" id="Resource_876th"]
+script = ExtResource("4_uahgf")
+sounds = Array[AudioStream]([ExtResource("5_eo5i4")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lt12g"]
+
+[sub_resource type="Resource" id="Resource_qtisg"]
+script = ExtResource("7_r1mty")
+texture = SubResource("PlaceholderTexture2D_lt12g")
+
+[resource]
+script = ExtResource("3_ciwbb")
+fsm_root = ExtResource("2_nt7qw")
+attack = ExtResource("1_nt7qw")
+attack_range = 500.0
+nom = "Wizard"
+spawner_assemblers = Array[int]([0, 1, 2, 3, 4, 6])
+sound_data = Dictionary[int, ExtResource("4_uahgf")]({
+0: SubResource("Resource_876th")
+})
+spells = Dictionary[ExtResource("6_qqbnj"), bool]({
+ExtResource("7_ciwbb"): true
+})
+texture = SubResource("Resource_qtisg")
+vision = 500.0
+metadata/_custom_type_script = "uid://bovgs2er68716"

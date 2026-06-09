@@ -3,7 +3,7 @@ extends LeafState
 class_name CommonLock
 
 @export
-var lock_time:float = 0.9
+var lock_time:float = 0.4
 
 var _timer:Timer
 
@@ -13,7 +13,7 @@ func init() -> void:
 	
 	_timer.timeout.connect(_timeout)
 	_timer.name = nom() + " timer"
-	ctx.pawn.add_child(_timer)
+	ctx.unit.add_child(_timer)
 
 func control_flow_enter() -> void:
 	_timer.start()
@@ -21,6 +21,7 @@ func control_flow_enter() -> void:
 	super.control_flow_enter()
 
 func control_flow_exit() -> void:
+	super.control_flow_exit()
 	_timer.stop()
 	bb.logg(nom() + " timer stoped on " + str(_timer.time_left))
 	exit_update()

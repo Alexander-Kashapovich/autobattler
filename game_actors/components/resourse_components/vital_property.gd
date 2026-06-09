@@ -6,8 +6,13 @@ class_name VitalProperty
 var _val:float
 
 
+## Return percentage
 signal modified(val:float)
+
+## val == 0
 signal out
+
+## val == max_val
 signal full
 
 func fill() -> void:

@@ -20,5 +20,4 @@ func power_at(i:int) -> float:
 	return (100.0 + i * 2.0)
 
 func bonus_at(i:int) -> float:
-	@warning_ignore("integer_division")
-	return i/5
+	return int(i/5)

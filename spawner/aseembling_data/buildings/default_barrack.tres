@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="BarrackSpawnerData" load_steps=8 format=3 uid="uid://cxl4tbl0xis5v"]
+
+[ext_resource type="Script" uid="uid://cpjx4temegckr" path="res://spawner/spawner_data/barrack_spawner_data.gd" id="1_i6o2h"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="2_cycf4"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="3_asrs4"]
+[ext_resource type="Resource" uid="uid://cfclfxkoewwbc" path="res://spells_res/skill_reses/only_self_skills/spawn/spawn_trooper.tres" id="4_asrs4"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="4_b4y6a"]
+[ext_resource type="Texture2D" uid="uid://diwp5la6l8tlw" path="res://assets/dbg_trash/hom.png" id="6_b4y6a"]
+
+[sub_resource type="Resource" id="Resource_cycf4"]
+script = ExtResource("4_b4y6a")
+texture = ExtResource("6_b4y6a")
+
+[resource]
+script = ExtResource("1_i6o2h")
+nom = "Trooper Barrack"
+is_building = true
+spawner_assemblers = Array[int]([0, 1, 5, 6])
+spells = Dictionary[ExtResource("3_asrs4"), bool]({
+ExtResource("4_asrs4"): true
+})
+texture = SubResource("Resource_cycf4")
+metadata/_custom_type_script = "uid://cpjx4temegckr"

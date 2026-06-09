@@ -1,0 +1,121 @@
+[gd_resource type="Resource" script_class="Root" load_steps=41 format=3 uid="uid://qj10lot7ijql"]
+
+[ext_resource type="Script" uid="uid://ljkk7lvjqgaa" path="res://game_actors/fsm/nfsm_nodes/root_node.gd" id="1_r11nr"]
+[ext_resource type="Script" uid="uid://b4m8en5a83c0l" path="res://game_actors/fsm/state.gd" id="2_0b0u8"]
+[ext_resource type="Script" uid="uid://bi00tsiv15smh" path="res://game_actors/fsm/nfsm_leafs/dying.gd" id="3_x08g1"]
+[ext_resource type="Resource" uid="uid://bvt3fbcqpdasv" path="res://assets/units/misc/die.tres" id="4_b6cmb"]
+[ext_resource type="Script" uid="uid://c8ypbl1f0vk1c" path="res://game_actors/fsm/nfsm_nodes/alive_node.gd" id="5_y5oum"]
+[ext_resource type="Script" uid="uid://b1w5hcbqepsai" path="res://game_actors/fsm/nfsm_nodes/rest_node.gd" id="6_0s1vk"]
+[ext_resource type="Script" uid="uid://dhngvvkemgpyq" path="res://game_actors/fsm/nfsm_leafs/move.gd" id="7_x7kd4"]
+[ext_resource type="Resource" uid="uid://dc5emv744uyoq" path="res://assets/units/elf_troop/move.tres" id="8_1s2f8"]
+[ext_resource type="Script" uid="uid://c8m721r7tj42j" path="res://game_actors/fsm/nfsm_leafs/wait_idle.gd" id="9_ebkuu"]
+[ext_resource type="Resource" uid="uid://cor8qmyg2kr8t" path="res://assets/units/elf_troop/idle.tres" id="10_fsx6q"]
+[ext_resource type="Script" uid="uid://c51ss8vatgmc8" path="res://game_actors/fsm/nfsm_nodes/retreat_node.gd" id="11_4qudl"]
+[ext_resource type="Script" uid="uid://42clr85q46e" path="res://game_actors/fsm/nfsm_nodes/offfensive_node.gd" id="12_8t3pt"]
+[ext_resource type="Script" uid="uid://rwauchcnlg3i" path="res://game_actors/fsm/nfsm_nodes/travel_node.gd" id="13_qten5"]
+[ext_resource type="Script" uid="uid://dtarjb3ipqchs" path="res://game_actors/fsm/nfsm_leafs/idle.gd" id="14_0pley"]
+[ext_resource type="Script" uid="uid://csfpu7hhjcpsr" path="res://game_actors/fsm/nfsm_leafs/chase.gd" id="15_q60ht"]
+[ext_resource type="Resource" uid="uid://paaxxxewsgs7" path="res://assets/units/elf_troop/chase.tres" id="16_g30fr"]
+[ext_resource type="Script" uid="uid://ch821oh3gbjup" path="res://game_actors/fsm/nfsm_leafs/precast.gd" id="17_rnjg2"]
+[ext_resource type="Resource" uid="uid://2b2hhasxl3tw" path="res://assets/units/elf_troop/precast.tres" id="18_i8j12"]
+[ext_resource type="Script" uid="uid://bb4pvywqlqxpd" path="res://game_actors/fsm/nfsm_leafs/cast.gd" id="19_xdqup"]
+[ext_resource type="Resource" uid="uid://c3s8hermypwxh" path="res://assets/units/elf_troop/cast.tres" id="20_liq52"]
+[ext_resource type="Script" uid="uid://gfeij8146hvu" path="res://game_actors/fsm/nfsm_leafs/swing.gd" id="21_du2lb"]
+[ext_resource type="Resource" uid="uid://dpeue6b06a4q1" path="res://assets/units/elf_troop/swing.tres" id="22_o5sex"]
+[ext_resource type="Script" uid="uid://ed8ls8ixvgl" path="res://game_actors/fsm/nfsm_leafs/hit.gd" id="23_pcrap"]
+[ext_resource type="Resource" uid="uid://fdugc6rqe82g" path="res://assets/units/elf_troop/hit.tres" id="24_prlj7"]
+[ext_resource type="Script" uid="uid://cw476dnuc5qw6" path="res://game_actors/fsm/nfsm_leafs/stunned.gd" id="25_dwfao"]
+
+[sub_resource type="Resource" id="Resource_0pley"]
+script = ExtResource("25_dwfao")
+visual_data = ExtResource("10_fsx6q")
+
+[sub_resource type="Resource" id="Resource_1s2f8"]
+script = ExtResource("15_q60ht")
+visual_data = ExtResource("16_g30fr")
+
+[sub_resource type="Resource" id="Resource_4qudl"]
+script = ExtResource("21_du2lb")
+lock_time = 0.2
+visual_data = ExtResource("22_o5sex")
+
+[sub_resource type="Resource" id="Resource_8t3pt"]
+script = ExtResource("23_pcrap")
+lock_time = 0.2
+visual_data = ExtResource("24_prlj7")
+
+[sub_resource type="Resource" id="Resource_ebkuu"]
+script = ExtResource("17_rnjg2")
+visual_data = ExtResource("18_i8j12")
+
+[sub_resource type="Resource" id="Resource_fsx6q"]
+script = ExtResource("19_xdqup")
+visual_data = ExtResource("20_liq52")
+
+[sub_resource type="Resource" id="Resource_0s1vk"]
+script = ExtResource("14_0pley")
+visual_data = ExtResource("10_fsx6q")
+
+[sub_resource type="Resource" id="Resource_0b0u8"]
+script = ExtResource("7_x7kd4")
+visual_data = ExtResource("8_1s2f8")
+
+[sub_resource type="Resource" id="Resource_x7kd4"]
+script = ExtResource("13_qten5")
+default_state = 1
+states = Dictionary[int, ExtResource("2_0b0u8")]({
+0: SubResource("Resource_0s1vk"),
+1: SubResource("Resource_0b0u8")
+})
+
+[sub_resource type="Resource" id="Resource_qten5"]
+script = ExtResource("12_8t3pt")
+default_state = 13
+states = Dictionary[int, ExtResource("2_0b0u8")]({
+2: SubResource("Resource_1s2f8"),
+3: SubResource("Resource_4qudl"),
+4: SubResource("Resource_8t3pt"),
+5: SubResource("Resource_ebkuu"),
+6: SubResource("Resource_fsx6q"),
+13: SubResource("Resource_x7kd4")
+})
+
+[sub_resource type="Resource" id="Resource_y5oum"]
+script = ExtResource("11_4qudl")
+default_state = 1
+states = Dictionary[int, ExtResource("2_0b0u8")]({
+1: SubResource("Resource_0b0u8")
+})
+
+[sub_resource type="Resource" id="Resource_x08g1"]
+script = ExtResource("9_ebkuu")
+visual_data = ExtResource("10_fsx6q")
+
+[sub_resource type="Resource" id="Resource_b6cmb"]
+script = ExtResource("6_0s1vk")
+states = Dictionary[int, ExtResource("2_0b0u8")]({
+0: SubResource("Resource_x08g1"),
+1: SubResource("Resource_0b0u8")
+})
+
+[sub_resource type="Resource" id="Resource_q60ht"]
+script = ExtResource("5_y5oum")
+default_state = 10
+states = Dictionary[int, ExtResource("2_0b0u8")]({
+7: SubResource("Resource_0pley"),
+10: SubResource("Resource_qten5"),
+11: SubResource("Resource_y5oum"),
+12: SubResource("Resource_b6cmb")
+})
+
+[sub_resource type="Resource" id="Resource_r11nr"]
+script = ExtResource("3_x08g1")
+visual_data = ExtResource("4_b6cmb")
+
+[resource]
+script = ExtResource("1_r11nr")
+default_state = 8
+states = Dictionary[int, ExtResource("2_0b0u8")]({
+8: SubResource("Resource_q60ht"),
+9: SubResource("Resource_r11nr")
+})

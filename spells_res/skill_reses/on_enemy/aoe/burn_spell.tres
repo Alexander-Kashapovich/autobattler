@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=10 format=3 uid="uid://3ajhqsddfowh"]
+
+[ext_resource type="Resource" uid="uid://cfjb33ctlcuhf" path="res://spells_res/skill_reses/on_enemy/aoe/burn_aoe.tres" id="1_cxsok"]
+[ext_resource type="Script" uid="uid://ca5ghqgonmul7" path="res://game_actors/components/spell_targeting/evaluators/test_cast_evaluator.gd" id="1_fityg"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="2_pk435"]
+[ext_resource type="Script" uid="uid://bgcv7pwtk4r1w" path="res://game_actors/components/spell_targeting/selectors/test_cast_selector.gd" id="3_bohjm"]
+[ext_resource type="Script" uid="uid://cvunbu2g2hi5x" path="res://game_actors/components/spell_targeting/evaluators/dist_eval.gd" id="3_jd012"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="5_jd012"]
+[ext_resource type="AudioStream" uid="uid://drnyijldvmb5x" path="res://assets/sound/steam_hooh.wav" id="6_y07jt"]
+
+[sub_resource type="Resource" id="Resource_y07jt"]
+script = ExtResource("3_jd012")
+value = 3.0
+metadata/_custom_type_script = "uid://cvunbu2g2hi5x"
+
+[sub_resource type="Resource" id="Resource_4yquy"]
+script = ExtResource("5_jd012")
+sounds = Array[AudioStream]([ExtResource("6_y07jt")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[resource]
+script = ExtResource("2_pk435")
+nom = "BurnLand"
+sound = SubResource("Resource_4yquy")
+cd = 15.0
+cast_range = 900.0
+_skill = ExtResource("1_cxsok")
+evaluators = Array[ExtResource("1_fityg")]([SubResource("Resource_y07jt")])
+metadata/_custom_type_script = "uid://igl5wr5jn8qh"

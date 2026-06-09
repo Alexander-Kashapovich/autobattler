@@ -4,7 +4,7 @@ class_name NavComp
 #one for all pawns
 var reached_threshold:float = 25
 
-@export var unit:Alived
+@export var unit:Node2D
 var _target:Vector2
 
 var _params:NavigationPathQueryParameters2D = NavigationPathQueryParameters2D.new()

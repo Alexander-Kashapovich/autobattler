@@ -2,6 +2,7 @@
 @tool
 extends Resource
 class_name State
+## Base state.
 
 enum ID
 {
@@ -32,42 +33,14 @@ enum ID
 	ROOT
 }
 
-static var dict = {
-	(Idle as Script).get_global_name() : ID.IDLE,
-	(WaitIdle as Script).get_global_name() : ID.IDLE,
-	
-	(Move as Script).get_global_name() : ID.MOVE,
-	
-	(Chase as Script).get_global_name() : ID.CHASE,
-	(RangedChase as Script).get_global_name() : ID.CHASE,
-	
-	(Hit as Script).get_global_name() : ID.ATTACK,
-	(Swing as Script).get_global_name() : ID.SWING,
-
-	(Cast as Script).get_global_name() : ID.CAST,
-	(PreCast as Script).get_global_name() : ID.PRECAST,
-	
-	(Dying as Script).get_global_name() : ID.DYING,
-	
-	(Stunned as Script).get_global_name() : ID.STUNNED,
-	
-	(Rest as Script).get_global_name() : ID.REST,
-	(Offensive as Script).get_global_name() : ID.OFFENSIVE,
-	(Retreat as Script).get_global_name() : ID.RETREAT,
-	(Travel as Script).get_global_name() : ID.TRAVEL,
-	(AliveState as Script).get_global_name() : ID.ALIVE,
-	
-	(Root as Script).get_global_name(): ID.ROOT
-	
-}
-
-var ctx:StateContext
+##Keep modules and handle its
+var ctx:UnitContext
+##Current around state
 var bb:BlackBoard
 
-@warning_ignore("unused_signal")
 signal request_transition(new_state:int)
 
-func fsm_init(c:StateContext,_bb:BlackBoard) -> void:
+func fsm_init(c:UnitContext,_bb:BlackBoard) -> void:
 	ctx = c
 	bb = _bb
 	init()
@@ -91,5 +64,8 @@ func exec(delta:float) -> void: pass
 func nom() -> String:
 	return get_script().get_global_name()
 
+@abstract
+func get_id() -> ID
+
 func logg(s:String) -> void:
-	bb.logg(nom() + " == " + s)
+	bb.logg(nom() + "::" + s)

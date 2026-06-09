@@ -1,7 +1,6 @@
-extends RefCounted
+extends Node
 class_name TargetEvaluationContext
 
-var unit:Caster
+#May be scaled to i forget. UnitType maybe like hunter, tank etc
 
-func _init(u:Caster) -> void:
-	unit = u
+@export var unit:Caster

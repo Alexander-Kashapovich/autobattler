@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="UnitSpawnerData" load_steps=11 format=3 uid="uid://camgntf6skhs7"]
+
+[ext_resource type="Resource" uid="uid://cpibysn68fn7c" path="res://spells_res/skill_reses/on_enemy/base_attacks/arrow_skill.tres" id="1_vrvd2"]
+[ext_resource type="Resource" uid="uid://bwy4fa3r1b640" path="res://spawner/aseembling_data/units/archer/archer_root.tres" id="2_rnoxy"]
+[ext_resource type="Script" uid="uid://bovgs2er68716" path="res://spawner/spawner_data/unit_spawner_data.gd" id="3_wvu6s"]
+[ext_resource type="Script" uid="uid://dl08bt5502t8h" path="res://game_actors/components/resourse_components/sound_data.gd" id="4_1buon"]
+[ext_resource type="AudioStream" uid="uid://c8sasbmokjtd" path="res://assets/sound/arrow.mp3" id="5_vm2nk"]
+[ext_resource type="Script" uid="uid://igl5wr5jn8qh" path="res://game_actors/skills/spell.gd" id="6_dpcyj"]
+[ext_resource type="Script" uid="uid://d2km05mxcm56e" path="res://game_actors/fsm/state_visual_data.gd" id="8_pvn3o"]
+
+[sub_resource type="Resource" id="Resource_n66ji"]
+script = ExtResource("4_1buon")
+sounds = Array[AudioStream]([ExtResource("5_vm2nk")])
+metadata/_custom_type_script = "uid://dl08bt5502t8h"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gp71x"]
+
+[sub_resource type="Resource" id="Resource_yboh4"]
+script = ExtResource("8_pvn3o")
+texture = SubResource("PlaceholderTexture2D_gp71x")
+
+[resource]
+script = ExtResource("3_wvu6s")
+fsm_root = ExtResource("2_rnoxy")
+attack = ExtResource("1_vrvd2")
+attack_range = 350.0
+nom = "Archer"
+spawner_assemblers = Array[int]([0, 1, 2, 3, 4, 6])
+sound_data = Dictionary[int, ExtResource("4_1buon")]({
+0: SubResource("Resource_n66ji")
+})
+texture = SubResource("Resource_yboh4")
+vision = 400.0
+metadata/_custom_type_script = "uid://bovgs2er68716"

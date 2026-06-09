@@ -10,8 +10,8 @@ class_name AffectStatEffect
 
 func _base_evaluate() -> float:
 	return (
-		(shield_val + attack_bonus_val) * 0.3 +
-		(defence_val + power_val) * 2.0
+		(shield_val + attack_bonus_val) * 0.8 +
+		(defence_val + power_val) * 1.1
 		)
 
 func execute(c:SkillExecutionContext) -> void:
@@ -22,6 +22,7 @@ func execute(c:SkillExecutionContext) -> void:
 		c.target.caster_stats.power += power_val
 		c.target.caster_stats.attack_bonus += attack_bonus_val
 	
+	#!!!!!!!
 	var s:String = ""
 	s += str(c.target.stats.def) + "\n"
 	s += str(c.target.stats.shield) + "\n"

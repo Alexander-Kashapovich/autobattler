@@ -1,5 +1,6 @@
 extends AudioStreamPlayer2D
 class_name SoundComp
+## Trash
 
 enum S{
 	ATTACK,
@@ -14,7 +15,10 @@ var sound_data:Dictionary[S,SoundData]
 
 var _acc:int = 0
 func exec(i:int) -> void:
-	play_manual(sound_data[i])
+	if sound_data.has(i):
+		play_manual(sound_data[i])
+	else:
+		print("no sound")
 
 func play_manual(d:SoundData) -> void:
 	_acc += 1

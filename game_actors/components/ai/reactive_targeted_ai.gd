@@ -10,11 +10,9 @@ func _ready() -> void:
 	timeout.connect(upd)
 	start()
 
-func range_sq() -> float:
-	return unit.get_cast_point().distance_squared_to(targeter.get_target().get_apply_point(self))
 
 func upd() -> void:
-	var target:Alived = targeter.get_target()
+	var target:Alive = targeter.get_target()
 	
 	var candidates:Array[Spell] = spells.handle_spells(wait_time)
 	
